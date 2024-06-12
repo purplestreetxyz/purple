@@ -1,20 +1,20 @@
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
+import Image from 'next/image'
+import logo from '@/images/icon.svg'
 
 export function ContactSection() {
   return (
-    <Container className="mt-24 sm:mt-32 lg:mt-40">
-      <FadeIn className="-mx-6 bg-neutral-950 px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
-        <div className="mx-auto max-w-4xl">
-          <div className="max-w-xl">
-            <h2 className="font-display text-3xl font-medium text-white [text-wrap:balance] sm:text-4xl">
-              Tell us about your project
+    <Container className="">
+      <FadeIn className="-mx-6 px-6 py-20 sm:mx-0 md:px-12">
+        <div className="py-10">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Start learning today.
             </h2>
-            <div className="mt-6 flex">
-              <Button href="/contact" invert>
-                Contact us
-              </Button>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <Button>Get in touch</Button>
             </div>
           </div>
         </div>

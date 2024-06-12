@@ -1,10 +1,12 @@
-@import url("https://use.typekit.net/wms0ajo.css");
+@import url('https://use.typekit.net/wms0ajo.css');
 
 @tailwind base;
 
 @font-face {
-  font-family: 'granville';
+  font-family: 'roca';
   font-weight: 200 900;
   font-display: block;
   font-style: normal;
 }
+
+html { scroll-behavior: smooth; }

@@ -1,3 +1,7 @@
+.gothic {
+  font-family: 'news-gothic-std', sans-serif !important;
+}
+
 .typography {
   color: theme(colors.neutral.950);
   font-size: theme(fontSize.xl);

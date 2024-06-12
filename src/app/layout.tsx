@@ -7,7 +7,7 @@ import '@/styles/tailwind.css'
 export const metadata: Metadata = {
   title: {
     template: '%s - Purple Street',
-    default: 'Purple Street - Applying an intersectional and feminist perspective',
+    default: 'Purple Street',
   },
 }
 
