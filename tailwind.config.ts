@@ -22,9 +22,9 @@ export default {
         '4xl': '2.5rem',
       },
       fontFamily: {
-        sans: ['roca', ...defaultTheme.fontFamily.sans],
+        sans: ['Life'],
         display: [
-          ['roca', ...defaultTheme.fontFamily.sans],
+          ['Life'],
           { fontVariationSettings: '"wdth" 125' },
         ],
       },

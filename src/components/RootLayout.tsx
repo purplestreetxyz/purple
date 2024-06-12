@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation'
 import { createContext, useState } from 'react'
 
 import { Footer } from '@/components/Footer'
+import SlideOver from './SlideOver'
+import { Button } from './Button'
 
 const RootLayoutContext = createContext<{
   logoHovered: boolean
@@ -13,15 +15,62 @@ const RootLayoutContext = createContext<{
 } | null>(null)
 
 function Header() {
+  const [slideOverOpen, setSlideOverOpen] = useState(false)
+
   return (
     <header className="fixed top-0 z-10 w-full w-full border-b bg-white">
       <div className="mx-auto flex h-14 items-center justify-between px-4">
-        <Link href="/" className="relative -mt-3 flex items-center gap-4">
+        <Link
+          href="/"
+          className="relative -mt-3 flex items-center gap-4"
+        >
           <h1 className="mt-2 text-3xl font-medium">Purple</h1>
           <span className="absolute -bottom-3 right-0 text-sm">street</span>
         </Link>
+        <div className="sm:hidden">
+          <button
+            onClick={() => setSlideOverOpen(true)}
+            className="text-neutral-700"
+          >
+            Menu
+          </button>
+          <SlideOver
+            open={slideOverOpen}
+            onClose={() => setSlideOverOpen(false)}
+            className=""
+          >
+            <nav>
+              <ul
+                className="gothic
+            gap-x-6
+            font-display
+            text-sm
+            uppercase
+            tracking-wider
+            text-neutral-700
+          "
+                onClick={() => setSlideOverOpen(false)}
+              >
+                <li>
+                  <Link href="#workshops">Workshops</Link>
+                </li>
+                <li>
+                  <Link href="#walks">Walks</Link>
+                </li>
+                <li>
+                  <Link href="#courses">Courses</Link>
+                </li>
+                <li>
+                  <Link href="#about-us">About us</Link>
+                </li>
+              </ul>
+
+              <Button>Get in touch</Button>
+            </nav>
+          </SlideOver>
+        </div>
         <div className="hidden items-center space-x-6 sm:flex">
-          <nav>
+          <nav className="flex items-center gap-6">
             <ul
               className="gothic flex
             gap-x-6
@@ -45,6 +94,7 @@ function Header() {
                 <Link href="#about-us">About us</Link>
               </li>
             </ul>
+            <Button className="">Get in touch</Button>
           </nav>
         </div>
       </div>

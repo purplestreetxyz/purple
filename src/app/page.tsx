@@ -72,12 +72,18 @@ export default async function Home() {
     <>
       <Container className="mt-24 text-center sm:mt-32 md:mt-56">
         <FadeIn>
-          <h1 className="font-display text-5xl tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
-            Applying an intersectional and feminist perspective.
+          <div className="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]"></div>
+          <h1 className="helvetica font-outline font-display text-5xl uppercase tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
+            Did you know...
           </h1>
-          <p className="mt-6 text-xl text-neutral-950">
-            Helping universities, companies, and public entities to adopt an
-            intersectional and feminist approach to urbanism and education.
+          <p className="mt-6 text-4xl text-neutral-950">
+            that Urban Planning can improve gender equality?
+          </p>
+          <h1 className="helvetica font-outline font-display text-5xl uppercase tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
+            Have you ever thought of...
+          </h1>
+          <p className="mt-6 text-4xl text-neutral-950">
+            that Urban Planning can improve gender equality?
           </p>
         </FadeIn>
       </Container>
@@ -94,7 +100,7 @@ export default async function Home() {
                 className="grayscale"
               />
             </div>
-            <div className="w-full p-6 sm:p-10 sm:w-1/2">
+            <div className="w-full p-6 sm:w-1/2 sm:p-10">
               <h2 className="font-display text-3xl tracking-tight text-neutral-950">
                 Workshops
               </h2>
@@ -109,7 +115,7 @@ export default async function Home() {
       </div>
       <div id="walks">
         <FadeIn>
-          <div className="w-full items-center justify-center flex flex-col sm:flex-row">
+          <div className="flex w-full flex-col items-center justify-center sm:flex-row">
             <div className="order-2 w-full p-6 sm:w-1/2 sm:p-10">
               <h2 className="font-display text-3xl tracking-tight text-neutral-950">
                 Walks
@@ -121,7 +127,7 @@ export default async function Home() {
               </p>
               <Button>Get in touch</Button>
             </div>
-            <div className="order-1 sm:order-2 w-full sm:w-1/2">
+            <div className="order-1 w-full sm:order-2 sm:w-1/2">
               <Image
                 src={workshopInFribourg}
                 alt="University of Zurich"
@@ -164,7 +170,7 @@ export default async function Home() {
             </div>
             <div className="w-full p-6 sm:w-1/2 sm:p-10">
               <h2 className="font-display text-3xl tracking-tight text-neutral-950">
-                Hi there! I'm Laura
+                Hi there! I&apos;m Laura
               </h2>
               <p>
                 Interactive and engaging workshops designed to educate

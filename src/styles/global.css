@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Life';
+  src: url('../fonts/life.otf') format('opentype');
+}
+
+.helvetica {
+  font-family: 'Helvetica Neue', sans-serif !important;
+}
+
+.font-outline {
+  font-weight: 700 !important;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px;
+}
+
+html { scroll-behavior: smooth; }
