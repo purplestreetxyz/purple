@@ -169,7 +169,7 @@ export default async function Home() {
                 <Image
                   src={workshopInGeneva}
                   alt="University of Geneva course"
-                  className="h-[600px] object-cover grayscale"
+                  className="h-[600px] object-cover object-left grayscale"
                 />{' '}
               </div>
               <div className="w-full space-y-2 p-6 sm:w-1/2 sm:p-10">
