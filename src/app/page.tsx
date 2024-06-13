@@ -15,7 +15,8 @@ import logoUniversityOfFribourg from '@/images/clients/university-of-fribourg.sv
 import logoLares from '@/images/clients/lares.svg'
 import workshopInFribourg from '@/images/workshop-fribourg.jpeg'
 import workshopInGeneva from '@/images/workshop-geneva.jpg'
-import laura from '@/images/laura.jpeg'
+import walkFribourg from '@/images/walk-fribourg.jpeg'
+import laura from '@/images/laura.jpg'
 import { Button } from '@/components/Button'
 
 const clients = [
@@ -75,10 +76,10 @@ export default async function Home() {
           <FadeIn>
             <h2 className="text-md font-bold">Did you know</h2>
             <h1 className="helvetica font-outline font-display text-3xl text-neutral-950 sm:text-7xl">
-              Urban Planning can improve gender equality
+              Urban Planning can improve Gender Equality
             </h1>
             <h2 className="text-md mt-10 text-center sm:text-xl">
-              At Purple Street, we analyse public spaces with a gender and
+              at Purple Street, we analyse public spaces with a gender and
               intersectional approach through our walks, workshops, and
               educational materials.
             </h2>
@@ -86,15 +87,15 @@ export default async function Home() {
         </div>
       </Container>
       <Clients />
-      <Container>
+      <div className="mx-auto max-w-7xl">
         <div id="workshops">
           <FadeIn>
             <div className="w-full items-center justify-center sm:flex">
               <div className="w-full sm:w-1/2">
                 <Image
-                  src={workshopInGeneva}
-                  alt="University of Geneva"
-                  className="grayscale"
+                  src={workshopInFribourg}
+                  alt="University of Fribourg workshop"
+                  className="h-[600px] w-full object-cover grayscale"
                 />
               </div>
               <div className="w-full space-y-2 p-6 sm:w-1/2 sm:p-10">
@@ -152,9 +153,9 @@ export default async function Home() {
               </div>
               <div className="order-1 w-full sm:order-2 sm:w-1/2">
                 <Image
-                  src={workshopInFribourg}
-                  alt="University of Zurich"
-                  className="grayscale"
+                  src={walkFribourg}
+                  alt="Walk in Fribourg"
+                  className="h-[600px] w-full object-cover grayscale"
                 />
               </div>
             </div>
@@ -167,13 +168,13 @@ export default async function Home() {
               <div className="w-full sm:w-1/2">
                 <Image
                   src={workshopInGeneva}
-                  alt="University of Geneva"
-                  className="grayscale"
+                  alt="University of Geneva course"
+                  className="h-[600px] object-cover grayscale"
                 />{' '}
               </div>
               <div className="w-full space-y-2 p-6 sm:w-1/2 sm:p-10">
                 <h2 className="font-outline text-4xl tracking-tight text-neutral-950">
-                  Courses
+                  Educational material
                 </h2>
                 <p>
                   Our educational materials are designed to integrate urban
@@ -189,15 +190,15 @@ export default async function Home() {
             </div>
           </FadeIn>
         </div>
-      </Container>
+      </div>
 
-      <div id="about-us" className="bg-black py-20 sm:mt-8">
+      <div id="about-us" className="bg-black py-20">
         <Container>
           <FadeIn>
             <div className="w-full gap-8 space-y-4 text-white sm:flex sm:space-y-0">
               <div className="w-full sm:w-1/3">
                 <Image
-                  className="aspect-[3/2] w-full object-cover grayscale"
+                  className="aspect-1 w-full object-cover grayscale"
                   src={laura}
                   alt="Laura Mayer"
                 />
@@ -252,18 +253,17 @@ export default async function Home() {
                   by the work and life of Jane Jacobs. These walks focused on
                   observing and understanding everyday urban life from a unique
                   perspective. As her passion for gender-inclusive urban
-                  planning grew, Laura partnered with Equal Saree, a team of
+                  planning grew, she partnered with Equal Saree, a team of
                   feminist architects and urban planners. Together, they
                   developed the Urbanism & Gender Equality workshops.
                 </p>
                 <p className="mt-4 text-base leading-7">
-                  Laura&apos;s goal is to promote a gender intersectional
-                  perspective in public spaces and educational fields. She
-                  believes it&apos;s crucial to educate the next generation
-                  about the importance of gender equality in urban planning to
-                  create more inclusive, safe, and vibrant communities. Join
-                  Laura in her mission to transform our cities and schools for a
-                  better future.
+                  Her goal is to promote a gender intersectional perspective in
+                  public spaces and educational fields. She believes it&apos;s
+                  crucial to educate the next generation about the importance of
+                  gender equality in urban planning to create more inclusive,
+                  safe, and vibrant communities. Join Laura in her mission to
+                  transform our cities and schools for a better future.
                 </p>
               </div>
             </div>

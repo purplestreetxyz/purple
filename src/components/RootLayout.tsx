@@ -55,7 +55,7 @@ function Header() {
                   <Link href="#walks">Walks</Link>
                 </li>
                 <li>
-                  <Link href="#courses">Courses</Link>
+                  <Link href="#courses">Educational material</Link>
                 </li>
                 <li>
                   <Link href="#about-us">About us</Link>
@@ -86,7 +86,7 @@ function Header() {
                 <Link href="#walks">Walks</Link>
               </li>
               <li>
-                <Link href="#courses">Courses</Link>
+                <Link href="#courses">Educational material</Link>
               </li>
               <li>
                 <Link href="#about-us">About us</Link>
