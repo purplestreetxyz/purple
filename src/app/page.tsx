@@ -112,12 +112,16 @@ export default async function Home() {
                   university students, it focuses on architecture, urban
                   planning, sociology, and geography.
                 </p>
-                <div>
+                <div className="flex items-center gap-2">
+                  <a href="#contact">
+                    <Button invert>Get in touch</Button>
+                  </a>
                   <a
                     href="/workshop.pdf"
+                    className="text-sm font-medium underline"
                     download="Purple Street Workshop Information"
                   >
-                    <Button invert>Get more info</Button>
+                    Download example booklet
                   </a>
                 </div>
               </div>
@@ -142,12 +146,16 @@ export default async function Home() {
                   walk through their neighborhoods to assess different aspects
                   that affect their perception of safety and urban quality.
                 </p>
-                <div>
+                <div className="flex items-center gap-2">
+                  <a href="#contact">
+                    <Button invert>Get in touch</Button>
+                  </a>
                   <a
                     href="/walks.pdf"
+                    className="text-sm font-medium underline"
                     download="Purple Street Walks Information"
                   >
-                    <Button invert>Get more info</Button>
+                    Download example booklet
                   </a>
                 </div>
               </div>
@@ -183,9 +191,11 @@ export default async function Home() {
                   resources include comprehensive course modules, engaging
                   presentations, and practical worksheets.
                 </p>
-                <a href="#contact">
-                  <Button invert>Get in touch</Button>
-                </a>
+                <div>
+                  <a href="#contact">
+                    <Button invert>Get in touch</Button>
+                  </a>
+                </div>
               </div>
             </div>
           </FadeIn>
