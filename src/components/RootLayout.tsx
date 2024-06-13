@@ -4,10 +4,11 @@ import { MotionConfig, motion, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { createContext, useState } from 'react'
+import logo from '@/images/icon.svg'
 
 import { Footer } from '@/components/Footer'
 import SlideOver from './SlideOver'
-import { Button } from './Button'
+import Image from 'next/image'
 
 const RootLayoutContext = createContext<{
   logoHovered: boolean
@@ -20,12 +21,8 @@ function Header() {
   return (
     <header className="fixed top-0 z-10 w-full w-full border-b bg-white">
       <div className="mx-auto flex h-14 items-center justify-between px-4">
-        <Link
-          href="/"
-          className="relative -mt-3 flex items-center gap-4"
-        >
-          <h1 className="mt-2 text-3xl font-medium">Purple</h1>
-          <span className="absolute -bottom-3 right-0 text-sm">street</span>
+        <Link href="/" className="relative -mt-3 flex items-center gap-4">
+          <Image src={logo} alt="Purple Street logo" width={25} height={25} />
         </Link>
         <div className="sm:hidden">
           <button
@@ -42,7 +39,7 @@ function Header() {
             <nav>
               <ul
                 className="gothic
-            gap-x-6
+            gap-y-6
             font-display
             text-sm
             uppercase
@@ -63,9 +60,10 @@ function Header() {
                 <li>
                   <Link href="#about-us">About us</Link>
                 </li>
+                <li>
+                  <Link href="#contact">Contact</Link>
+                </li>
               </ul>
-
-              <Button>Get in touch</Button>
             </nav>
           </SlideOver>
         </div>
@@ -93,8 +91,10 @@ function Header() {
               <li>
                 <Link href="#about-us">About us</Link>
               </li>
+              <li>
+                <Link href="#contact">Contact</Link>
+              </li>
             </ul>
-            <Button className="">Get in touch</Button>
           </nav>
         </div>
       </div>
@@ -113,7 +113,7 @@ function RootLayoutInner({ children }: { children: React.ReactNode }) {
         className="relative flex flex-auto overflow-hidden bg-white"
       >
         <motion.div layout className="relative isolate flex w-full flex-col">
-          <main className="w-full flex-auto">{children}</main>
+          <main className="w-full">{children}</main>
 
           <Footer />
         </motion.div>

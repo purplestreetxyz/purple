@@ -22,11 +22,8 @@ export default {
         '4xl': '2.5rem',
       },
       fontFamily: {
-        sans: ['Life'],
-        display: [
-          ['Life'],
-          { fontVariationSettings: '"wdth" 125' },
-        ],
+        sans: ['Inter'],
+        display: [['Inter'], { fontVariationSettings: '"wdth" 125' }],
       },
     },
   },
