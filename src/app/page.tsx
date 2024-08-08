@@ -13,7 +13,7 @@ import logoCantonDeValais from '@/images/clients/canton-de-valais.svg'
 import logoUniversityOfGeneva from '@/images/clients/university-of-geneva.svg'
 import logoUniversityOfFribourg from '@/images/clients/university-of-fribourg.svg'
 import logoLares from '@/images/clients/lares.svg'
-import workshopInFribourg from '@/images/workshop-fribourg.png'
+import workshopInFribourg from '@/images/workshop.jpg'
 import workshopInGeneva from '@/images/workshop-geneva.jpg'
 import walkFribourg from '@/images/walk-fribourg.png'
 import laura from '@/images/laura.jpg'
@@ -95,7 +95,7 @@ export default async function Home() {
                 <Image
                   src={workshopInFribourg}
                   alt="University of Fribourg workshop"
-                  className="h-[600px] w-full object-cover grayscale"
+                  className="h-[600px] max-h-[50vh] w-full object-cover grayscale"
                 />
               </div>
               <div className="w-full space-y-2 p-6 sm:w-1/2 sm:p-10">
@@ -163,7 +163,7 @@ export default async function Home() {
                 <Image
                   src={walkFribourg}
                   alt="Walk in Fribourg"
-                  className="h-[600px] w-full object-cover grayscale"
+                  className="h-[600px] max-h-[50vh] w-full object-cover grayscale"
                 />
               </div>
             </div>
@@ -177,7 +177,7 @@ export default async function Home() {
                 <Image
                   src={workshopInGeneva}
                   alt="University of Geneva course"
-                  className="h-[600px] object-cover object-left grayscale"
+                  className="h-[600px] max-h-[50vh] object-cover object-left grayscale"
                 />{' '}
               </div>
               <div className="w-full space-y-2 p-6 sm:w-1/2 sm:p-10">
