@@ -18,6 +18,13 @@ export default {
       '7xl': ['4rem', { lineHeight: '4.5rem', fontWeight: 200 }],
     },
     extend: {
+      colors: {
+        paper: '#f4f1e8',
+        ink: '#17151a',
+        purple: '#5c21e6',
+        acid: '#dfff3f',
+        yellow: '#ffc91c',
+      },
       borderRadius: {
         '4xl': '2.5rem',
       },

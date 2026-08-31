@@ -6,15 +6,17 @@ import '@/styles/global.css'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Purple Street',
-    default: 'Purple Street',
+    template: '%s · Purple Street',
+    default: 'Purple Street · Urbanismo feminista y participativo',
   },
+  description:
+    'Urbanismo feminista, procesos participativos y herramientas para crear espacios más inclusivos, amables y cuidadores.',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full bg-neutral-950 text-base antialiased">
-      <body className="flex min-h-full flex-col">
+    <html lang="es" className="h-full bg-[#f4f1e8] text-base antialiased">
+      <body className="min-h-full">
         <RootLayout>{children}</RootLayout>
       </body>
     </html>

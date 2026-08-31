@@ -1,303 +1,747 @@
 import { type Metadata } from 'next'
-import Image from 'next/image'
+import Image, { type StaticImageData } from 'next/image'
 
-import { ContactSection } from '@/components/ContactSection'
-import { Container } from '@/components/Container'
-import { FadeIn, FadeInStagger } from '@/components/FadeIn'
-import { Testimonial } from '@/components/Testimonial'
-import logoJanesWalk from '@/images/clients/janes-walk.svg'
-import logoUniversityOfZurich from '@/images/clients/university-of-zurich.svg'
-import logoPedestriansMobility from '@/images/clients/pedestrian-mobility.svg'
-import logoEqualSaree from '@/images/clients/equal-saree.svg'
-import logoCantonDeValais from '@/images/clients/canton-de-valais.svg'
-import logoUniversityOfGeneva from '@/images/clients/university-of-geneva.svg'
-import logoUniversityOfFribourg from '@/images/clients/university-of-fribourg.svg'
-import logoLares from '@/images/clients/lares.svg'
-import workshopInFribourg from '@/images/workshop.jpg'
-import workshopInGeneva from '@/images/workshop-geneva.jpg'
-import walkFribourg from '@/images/walk-fribourg.png'
 import laura from '@/images/laura.jpg'
-import { Button } from '@/components/Button'
+import logoCantonDeValais from '@/images/clients/canton-de-valais.svg'
+import logoEqualSaree from '@/images/clients/equal-saree.svg'
+import logoAjuntamentBarcelona from '@/images/clients/ajuntament-barcelona.svg'
+import logoBarcelona2026 from '@/images/clients/barcelona-2026.png'
+import logoDiputacioBarcelona from '@/images/clients/diputacio-barcelona.svg'
+import logoIsGlobal from '@/images/clients/isglobal.png'
+import logoJanesWalk from '@/images/clients/janes-walk.svg'
+import logoLares from '@/images/clients/lares.svg'
+import logoPedestrianMobility from '@/images/clients/pedestrian-mobility.svg'
+import logoReplantegem from '@/images/clients/replantegem.png'
+import logoTerritorisXlm from '@/images/clients/territoris-xlm.svg'
+import logoUia from '@/images/clients/uia.png'
+import logoMinisterioVivienda from '@/images/clients/ministerio-vivienda.png'
+import logoUniversityOfFribourg from '@/images/clients/university-of-fribourg.svg'
+import logoUniversityOfGeneva from '@/images/clients/university-of-geneva.svg'
+import logoUniversityOfZurich from '@/images/clients/university-of-zurich.svg'
+import { HeroSlideshow } from '@/components/HeroSlideshow'
+import { ProjectSlideshow } from '@/components/ProjectSlideshow'
+import { ProjectVideo } from '@/components/ProjectVideo'
 
-const clients = [
-  ['University of Geneva', logoUniversityOfGeneva],
+export const metadata: Metadata = {
+  title: 'Urbanismo feminista y participativo',
+  description:
+    'Purple Street es la práctica de Laura Mayer: talleres, marchas urbanas, investigación y herramientas digitales para crear ciudades más inclusivas y cuidadoras.',
+}
+
+const collaborators: [string, StaticImageData][] = [
+  ['Université de Genève', logoUniversityOfGeneva],
   ['University of Zurich', logoUniversityOfZurich],
-  ['University of Fribourg', logoUniversityOfFribourg],
-  ['Canton de Valais', logoCantonDeValais],
+  ['Université de Fribourg', logoUniversityOfFribourg],
+  ['Canton du Valais', logoCantonDeValais],
   ['Equal Saree', logoEqualSaree],
-  ['Pedestrians Mobility', logoPedestriansMobility],
-  ['Janes Walk', logoJanesWalk],
+  ['Pedestrian Mobility Switzerland', logoPedestrianMobility],
+  ["Jane's Walk", logoJanesWalk],
   ['Lares', logoLares],
+  ['Territoris XLM', logoTerritorisXlm],
+  ['Replantegem', logoReplantegem],
+  ['ISGlobal', logoIsGlobal],
+  ['Ajuntament de Barcelona', logoAjuntamentBarcelona],
+  ['Diputació de Barcelona', logoDiputacioBarcelona],
+  ['UIA', logoUia],
+  ['Barcelona 2026 Capital Mundial de la Arquitectura', logoBarcelona2026],
+  ['Ministerio de Vivienda y Agenda Urbana', logoMinisterioVivienda],
 ]
 
-function Clients() {
+const collaboratorRows = [collaborators.slice(0, 8), collaborators.slice(8)]
+
+const universitySlides = [
+  {
+    src: '/media/university/university-workshop-01.jpg',
+    alt: 'Taller universitario sobre urbanismo con mirada de género',
+  },
+  {
+    src: '/media/university/university-workshop-02.jpg',
+    alt: 'Presentación de un taller universitario en colaboración con Equal Saree',
+  },
+  {
+    src: '/media/university/university-workshop-03.jpg',
+    alt: 'Observación de campo con participantes de un taller universitario',
+  },
+  {
+    src: '/media/university/university-workshop-04.jpg',
+    alt: 'Sesión universitaria sobre urbanismo con mirada de género',
+  },
+]
+
+const fanzineSlides = [
+  {
+    src: '/media/fanzines/fanzines-workshop-01.jpg',
+    alt: 'Colección de fanzines feministas creados en Berlín',
+  },
+  {
+    src: '/media/fanzines/fanzines-workshop-02.jpg',
+    alt: 'Introducción a referentes feministas durante el taller de fanzines',
+  },
+  {
+    src: '/media/fanzines/fanzines-workshop-03.jpg',
+    alt: 'Niñas y niños creando sus propios fanzines feministas',
+  },
+  {
+    src: '/media/fanzines/fanzines-workshop-04.jpg',
+    alt: 'Proceso creativo del taller de fanzines feministas en Berlín',
+  },
+]
+
+const accessibilitySlides = [
+  {
+    src: '/media/accessibility/accessibility-workshop-01.jpg',
+    alt: 'Taller de accesibilidad universal en el INS Cavall Bernat',
+  },
+  {
+    src: '/media/accessibility/accessibility-workshop-02.jpg',
+    alt: 'Análisis de la accesibilidad de un baño utilizando una silla de ruedas',
+  },
+  {
+    src: '/media/accessibility/accessibility-workshop-03.jpg',
+    alt: 'Recorrido por el instituto experimentando distintas formas de movilidad',
+  },
+]
+
+const manresaSlides = [
+  {
+    src: '/media/manresa/janes-walk-manresa-01.png',
+    alt: 'Jane’s Walk junto a un comercio local de Manresa',
+  },
+  {
+    src: '/media/manresa/janes-walk-manresa-02.png',
+    alt: 'Conversación sobre las transformaciones urbanas de Manresa',
+  },
+  {
+    src: '/media/manresa/janes-walk-manresa-03.png',
+    alt: 'Participantes de Jane’s Walk compartiendo experiencias en Manresa',
+  },
+]
+
+const services = [
+  {
+    title: 'Divulgación',
+    href: 'https://www.instagram.com/purplestreet.xyz/',
+    text: 'Acercamos el urbanismo y la mirada de género a públicos y contextos diversos.',
+  },
+  {
+    title: 'Talleres',
+    href: '#talleres',
+    text: 'Diseñamos experiencias de aprendizaje para universidades, institutos e infancia.',
+  },
+  {
+    title: 'Participación ciudadana',
+    href: '#participacion',
+    text: 'Facilitamos procesos ciudadanos que convierten experiencias cotidianas en propuestas.',
+  },
+  {
+    title: 'Marchas urbanas',
+    href: '#paseos',
+    text: 'Leemos la ciudad caminando, compartiendo memorias, cuidados y necesidades.',
+  },
+  {
+    title: 'Investigación',
+    href: '#investigacion',
+    text: 'Exploramos relaciones entre cuerpxs, espacio público, memoria y representación.',
+  },
+  {
+    title: 'Apps sociales',
+    href: '#app-digital',
+    text: 'Creamos herramientas digitales que hacen más fácil participar, compartir y cuidar lo común.',
+  },
+]
+
+const Arrow = () => <span aria-hidden="true">↗</span>
+
+function EditorialChapterHeading({
+  index,
+  title,
+}: {
+  index: string
+  title: React.ReactNode
+}) {
   return (
-    <div className="bg-black py-20 sm:mt-8">
-      <Container>
-        <FadeIn className="flex items-center justify-center gap-x-8">
-          <h2 className="text-center font-display text-lg tracking-wider text-white">
-            We’ve worked with universities, companies and public entities ッ
-          </h2>
-        </FadeIn>
-        <FadeInStagger faster>
-          <ul
-            role="list"
-            className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4"
-          >
-            {clients.map(([client, logo]) => (
-              <li key={client}>
-                <FadeIn>
-                  <Image
-                    src={logo}
-                    alt={client}
-                    unoptimized
-                    className="mx-auto"
-                  />
-                </FadeIn>
-              </li>
-            ))}
-          </ul>
-        </FadeInStagger>
-      </Container>
-    </div>
+    <header className="editorial-chapter-heading">
+      <p className="editorial-chapter-heading__index">{index}</p>
+      <h2>{title}</h2>
+    </header>
   )
 }
 
-export const metadata: Metadata = {
-  description:
-    'At Purple Street, we create inclusive urban spaces through workshops and educational content. We empower universities, schools, companies, and public entities to adopt an intersectional and feminist approach to urbanism and education. Together, we can build cities for everyone.',
+function MediaCaption({ children }: { children: React.ReactNode }) {
+  return <div className="media-caption">{children}</div>
 }
 
-export default async function Home() {
+function EditorialProject({
+  index,
+  title,
+  caption,
+  media,
+  children,
+  reverse = false,
+  link,
+  secondaryLink,
+}: {
+  index: string
+  title: React.ReactNode
+  caption: string
+  media: React.ReactNode
+  children: React.ReactNode
+  reverse?: boolean
+  link?: { href: string; label: string }
+  secondaryLink?: { href: string; label: string }
+}) {
+  return (
+    <article className={`editorial-project${reverse ? ' is-reverse' : ''}`}>
+      <figure className="editorial-project__figure">
+        <div className="editorial-project__media">{media}</div>
+        <figcaption>{caption}</figcaption>
+      </figure>
+      <div className="editorial-project__copy">
+        <div className="editorial-project__meta">
+          <span>{index}</span>
+        </div>
+        <h3>{title}</h3>
+        <div className="editorial-project__text">{children}</div>
+        {(link || secondaryLink) && (
+          <div className="editorial-project__links">
+            {[link, secondaryLink].filter(Boolean).map((projectLink) => (
+              <a
+                key={projectLink!.href}
+                className="editorial-project__link"
+                href={projectLink!.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {projectLink!.label} <Arrow />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+  )
+}
+
+export default function Home() {
   return (
     <>
-      <Container className="mt-24">
-        <div className="relative flex h-[500px] items-center  justify-between text-center">
-          <FadeIn>
-            <h2 className="text-md font-bold">Did you know</h2>
-            <h1 className="helvetica font-outline font-display text-3xl text-neutral-950 sm:text-7xl">
-              Urban Planning can improve Gender Equality
-            </h1>
-            <h2 className="text-md mt-10 text-center sm:text-xl">
-              at Purple Street, we analyse public spaces with a gender and
-              intersectional approach through our walks, workshops, and
-              educational materials.
-            </h2>
-          </FadeIn>
+      <section className="studio-hero">
+        <HeroSlideshow />
+        <div className="studio-hero__overlay" />
+        <div className="studio-hero__content">
+          <h1 className="studio-hero__brand-title" aria-label="Purple Street">
+            <Image
+              src="/media/purple-logo-cropped.png"
+              alt=""
+              width={771}
+              height={968}
+              priority
+              className="studio-hero__wordmark"
+            />
+          </h1>
+          <p className="studio-hero__intro">
+            <span>Estudio de arquitectura y urbanismo</span>
+            <span>con mirada de género interseccional.</span>
+          </p>
         </div>
-      </Container>
-      <Clients />
-      <div className="mx-auto max-w-7xl">
-        <div id="workshops">
-          <FadeIn>
-            <div className="w-full items-center justify-center sm:flex">
-              <div className="w-full sm:w-1/2">
-                <Image
-                  src={workshopInFribourg}
-                  alt="University of Fribourg workshop"
-                  className="h-[600px] max-h-[50vh] w-full object-cover grayscale"
-                />
-              </div>
-              <div className="w-full space-y-2 p-6 sm:w-1/2 sm:p-10">
-                <h2 className="font-outline text-4xl tracking-tight text-neutral-950">
-                  Workshops
-                </h2>
-                <p>
-                  Workshops aim to merge theory and practical field observation
-                  to inspire participants in{' '}
-                  <strong className="font-medium">
-                    creating ideas for potential solutions
-                  </strong>
-                  applicable to various environments. Targeted mainly at
-                  university students, it focuses on architecture, urban
-                  planning, sociology, and geography.
-                </p>
-                <div className="flex items-center gap-2">
-                  <a href="#contact">
-                    <Button invert>Get in touch</Button>
-                  </a>
-                  <a
-                    href="/workshop.pdf"
-                    className="text-sm font-medium underline"
-                    download="Purple Street Workshop Information"
-                  >
-                    Download example booklet
-                  </a>
-                </div>
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-        <div id="walks">
-          <FadeIn>
-            <div className="flex w-full flex-col items-center justify-center sm:flex-row">
-              <div className="order-2 w-full space-y-2 p-6 sm:w-1/2 sm:p-10">
-                <h2 className="font-outline text-4xl tracking-tight text-neutral-950">
-                  Walks
-                </h2>
-                <p>
-                  Inspired by Jane Jacobs, an American activist known for her
-                  influence on urban studies, exploratory walks are a{' '}
-                  <strong className="font-medium">
-                    feminist participatory methodology
-                  </strong>{' '}
-                  that has evolved and adapted over the years to various
-                  contexts. These walks involve groups of local residents, who
-                  walk through their neighborhoods to assess different aspects
-                  that affect their perception of safety and urban quality.
-                </p>
-                <div className="flex items-center gap-2">
-                  <a href="#contact">
-                    <Button invert>Get in touch</Button>
-                  </a>
-                  <a
-                    href="/walks.pdf"
-                    className="text-sm font-medium underline"
-                    download="Purple Street Walks Information"
-                  >
-                    Download example booklet
-                  </a>
-                </div>
-              </div>
-              <div className="order-1 w-full sm:order-2 sm:w-1/2">
-                <Image
-                  src={walkFribourg}
-                  alt="Walk in Fribourg"
-                  className="h-[600px] max-h-[50vh] w-full object-cover grayscale"
-                />
-              </div>
-            </div>
-          </FadeIn>
-        </div>
+      </section>
 
-        <div id="courses">
-          <FadeIn>
-            <div className="w-full items-center justify-center sm:flex">
-              <div className="w-full sm:w-1/2">
-                <Image
-                  src={workshopInGeneva}
-                  alt="University of Geneva course"
-                  className="h-[600px] max-h-[50vh] object-cover object-left grayscale"
-                />{' '}
-              </div>
-              <div className="w-full space-y-2 p-6 sm:w-1/2 sm:p-10">
-                <h2 className="font-outline text-4xl tracking-tight text-neutral-950">
-                  Educational material
-                </h2>
-                <p>
-                  Our educational materials are designed to integrate urban
-                  planning and gender perspectives into school curricula,
-                  fostering awareness and understanding among students. These
-                  resources include comprehensive course modules, engaging
-                  presentations, and practical worksheets.
-                </p>
-                <div>
-                  <a href="#contact">
-                    <Button invert>Get in touch</Button>
-                  </a>
+      <section className="worked-with-section" aria-labelledby="worked-with-title">
+        <div className="worked-with-heading">
+          <h2 id="worked-with-title">Hemos trabajado con</h2>
+        </div>
+        <div className="logo-marquees">
+          {collaboratorRows.map((row, rowIndex) => (
+            <div
+              key={rowIndex}
+              className={`logo-marquee${rowIndex === 1 ? ' logo-marquee--reverse' : ''}`}
+            >
+              <div className="logo-marquee__track">
+                <div className="logo-marquee__group">
+                  {row.map(([name, logo]) => (
+                    <div className="logo-marquee__item" key={name}>
+                      <Image src={logo} alt={name} unoptimized />
+                    </div>
+                  ))}
+                </div>
+                <div className="logo-marquee__group" aria-hidden="true">
+                  {row.map(([name, logo]) => (
+                    <div className="logo-marquee__item" key={`${name}-copy`}>
+                      <Image src={logo} alt="" unoptimized />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          </FadeIn>
+          ))}
         </div>
+      </section>
+
+      <section id="que-hacemos" className="services-section">
+        <div className="services-intro">
+          <h2>Qué hacemos</h2>
+          <div className="services-intro__story">
+            <p>
+              Purple Street empezó como un proyecto de divulgación sobre el
+              espacio público desde una mirada de género interseccional. A
+              través de contenidos y marchas urbanas con personas vinculadas
+              al territorio, fue creciendo una comunidad con ganas de observar
+              y transformar la ciudad de otra manera.
+            </p>
+            <p>
+              Hoy combinamos procesos de participación con colectivas y
+              administraciones, talleres para universidades, profesionales,
+              adolescencia e infancia —una etapa que nos interesa especialmente
+              porque permite mirar el entorno sin tantas capas aprendidas— y el
+              desarrollo de herramientas digitales sociales. En paralelo,
+              investigamos cómo los cuerpos de las mujeres habitan y son
+              condicionados por el espacio urbano.
+            </p>
+          </div>
+        </div>
+        <div className="services-grid">
+          {services.map((service) => {
+            const isExternal = service.href.startsWith('http')
+            const content = (
+              <>
+                <span className="service-card__arrow" aria-hidden="true">
+                  {isExternal ? '↗' : '↘'}
+                </span>
+                <h3>{service.title}</h3>
+                <p>{service.text}</p>
+                <span className="service-card__link">
+                  {isExternal ? 'Ver Instagram' : 'Ver proyectos'}
+                </span>
+              </>
+            )
+
+            return (
+              <a
+                key={service.title}
+                href={service.href}
+                className="service-card"
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noreferrer' : undefined}
+              >
+                {content}
+              </a>
+            )
+          })}
+        </div>
+      </section>
+
+      <div className="project-flow">
+        <section
+          id="talleres"
+          className="chapter chapter--paper chapter--editorial"
+        >
+          <EditorialChapterHeading
+            index="1"
+            title="Talleres"
+          />
+
+          <div className="editorial-project-list">
+            <EditorialProject
+              index="1.1"
+              title="Urbanism & Gender Equality Workshop"
+              caption="Universidades de Ginebra, Lausana, Friburgo y Zúrich · Desde 2022"
+              media={
+                <ProjectSlideshow
+                  slides={universitySlides}
+                  label="Talleres en universidades"
+                />
+              }
+            >
+              <p>
+                Desde 2022, en colaboración con la cooperativa Equal Saree,
+                facilitamos talleres de urbanismo con mirada de género en las
+                universidades de Ginebra, Lausana, Friburgo y Zúrich. Combinamos
+                teoría del urbanismo feminista con herramientas de observación
+                y reflexión individual y colectiva. A partir de experiencias
+                cotidianas, el alumnado comparte perspectivas diversas, analiza
+                los espacios que habita y formula propuestas para transformarlos.
+              </p>
+            </EditorialProject>
+
+            <EditorialProject
+              index="1.2"
+              title="Mapeo participativo con infancia"
+              caption="Millorem el barri · Barcelona 2026"
+              reverse
+              media={
+                <ProjectVideo
+                  src="/media/video/millorem-el-barri.m4v"
+                  poster="/media/millorem-video-poster-user.png"
+                />
+              }
+              link={{
+                href: 'https://www.barcelona.cat/capitalmundialarquitectura/ca/programa/millorem-el-barri-leixample',
+                label: 'Ver programa oficial',
+              }}
+            >
+              <p>
+                En el marco del festival «Capital Mundial de l’Arquitectura» en
+                Barcelona, se han planteado talleres participativos dirigidos a
+                la infancia. La actividad se centra en el mapeo colaborativo: a
+                partir de un gran plano, se describen los itinerarios cotidianos
+                y se registran los puntos fuertes y débiles del entorno según su
+                experiencia. El resultado es un conjunto de propuestas que pone
+                en valor la mirada de la infancia, refuerza su vínculo con el
+                entorno y fomenta una lectura crítica del espacio construido.
+              </p>
+            </EditorialProject>
+
+            <EditorialProject
+              index="1.3"
+              title="Fanzines feministas"
+              caption="Fanzines feministas · Berlín 2025"
+              media={
+                <ProjectSlideshow
+                  slides={fanzineSlides}
+                  label="Fanzines feministas"
+                />
+              }
+            >
+              <p>
+                Taller de expresión creativa realizado con niñas, niños y
+                adolescentes de 7 a 16 años en el marco del Día de la Mujer
+                Trabajadora. A través del dibujo, la pintura y el collage,
+                descubren referentes feministas, construyen relatos propios y
+                los transforman en publicaciones manuales individuales o
+                colectivas que posteriormente se exponen.
+              </p>
+            </EditorialProject>
+
+            <EditorialProject
+              index="1.4"
+              title="Arquitectura a les Aules"
+              caption="INS Cavall Bernat · Terrassa 2025"
+              reverse
+              link={{
+                href: 'https://www.arquitectes.cat/ca/coac/arquiescola',
+                label: 'Ver proyecto Arquiescola',
+              }}
+              media={
+                <ProjectSlideshow
+                  slides={accessibilitySlides}
+                  label="Arquitectura en las aulas: accesibilidad"
+                />
+              }
+            >
+              <p>
+                En el marco de Arquiescola, un programa que acerca la
+                arquitectura a escuelas e institutos, esta edición abordó las
+                barreras arquitectónicas. A través de diferentes recorridos por
+                su centro educativo, el alumnado analizó la accesibilidad de los
+                espacios y desarrolló colectivamente propuestas para mejorarlos.
+              </p>
+            </EditorialProject>
+          </div>
+        </section>
+
+        <section
+          id="paseos"
+          className="chapter chapter--editorial chapter--editorial-tint"
+        >
+          <EditorialChapterHeading
+            index="2"
+            title="Marchas urbanas"
+          />
+          <div className="editorial-project-list">
+            <EditorialProject
+              index="2.1"
+              title={<>Jane’s Walk<br />Barcelona</>}
+              caption="Jane’s Walk · Barcelona 2026"
+              link={{
+                href: 'https://www.barcelona.cat/capitalmundialarquitectura/ca/programa/janes-walk-passejada-debat-inspirada-en-la-mirada-de-jane-jacobs-eixample',
+                label: 'Ver programa oficial',
+              }}
+              media={
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/media/janes-walk-sants-poster-user.png"
+                >
+                  <source
+                    src="/media/video/janes-walk-sants.m4v"
+                    type="video/mp4"
+                  />
+                </video>
+              }
+            >
+              <p>
+                En el marco del festival «Capital Mundial de l’Arquitectura» se
+                han organizado Jane’s Walks en los diez distritos de Barcelona.
+              </p>
+              <p>
+                Cada itinerario promueve la conversación y la exploración
+                compartida del entorno. La propuesta sitúa en el centro la vida
+                cotidiana —el espacio público, los cuidados, el comercio local
+                y la memoria— y fomenta la pluralidad de miradas para construir
+                un relato colectivo.
+              </p>
+            </EditorialProject>
+
+            <EditorialProject
+              index="2.2"
+              title={<>Jane’s Walk<br />Manresa</>}
+              caption="Jane’s Walk · Manresa 2025"
+              reverse
+              media={
+                <ProjectSlideshow
+                  slides={manresaSlides}
+                  label="Jane’s Walk Manresa"
+                />
+              }
+            >
+              <p>
+                En 2025 celebramos una Jane’s Walk en Manresa. Tuvimos la suerte
+                de caminar junto a quien había ejercido como urbanista municipal
+                de la ciudad durante muchos años y conversar sobre sus
+                transformaciones urbanas, su memoria y los retos que todavía
+                permanecen abiertos.
+              </p>
+            </EditorialProject>
+
+            <EditorialProject
+              index="2.3"
+              title={<>Jane’s Walk<br />Sion</>}
+              caption="Jane’s Walk · Sion 2021–2023"
+              link={{
+                href: 'https://janeswalk.org/',
+                label: 'Conocer Jane’s Walk',
+              }}
+              media={
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/media/janes-walk-sion-poster-clear.jpg"
+                >
+                  <source
+                    src="/media/video/janes-walk-sion.m4v"
+                    type="video/mp4"
+                  />
+                </video>
+              }
+            >
+              <p>
+                Jane’s Walk es un movimiento ciudadano de paseos conversados
+                gratuitos inspirado en Jane Jacobs. En 2021, 2022 y 2023
+                organizamos varias ediciones en Sion, Suiza. Cada recorrido se
+                construyó junto a comercios locales, centros de arte, artesanas
+                y artesanos, poniendo en valor su conocimiento y su relación
+                cotidiana con el territorio. Estas colaboraciones permitieron
+                compartir experiencias, detectar necesidades y construir una
+                lectura colectiva de la ciudad.
+              </p>
+            </EditorialProject>
+          </div>
+        </section>
+
+        <section
+          id="participacion"
+          className="chapter chapter--editorial chapter--paper"
+        >
+          <EditorialChapterHeading
+            index="3"
+            title="Participación ciudadana"
+          />
+          <div className="editorial-project-list">
+            <EditorialProject
+              index="3.1"
+              title="Transformación de espacios públicos"
+              caption="Espacios de uso cotidiano · Sesión abierta"
+              media={
+                <Image
+                  src="/media/participation-olesa.jpg"
+                  alt="Sesión abierta sobre espacios cotidianos"
+                  fill
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                />
+              }
+            >
+              <p>
+                Convertimos experiencias sobre calles, plazas y recorridos
+                habituales en prioridades y propuestas concretas.
+              </p>
+            </EditorialProject>
+
+            <EditorialProject
+              index="3.2"
+              title="Planificación territorial"
+              caption="Planificación territorial · Mapeo colectivo"
+              reverse
+              media={
+                <Image
+                  src="/media/participation-territorial-planning.png"
+                  alt="Mapa territorial trabajado colectivamente"
+                  fill
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                />
+              }
+            >
+              <p>
+                Mapas y recorridos incorporan el conocimiento cotidiano de la
+                ciudadanía a los procesos de planificación.
+              </p>
+            </EditorialProject>
+
+            <EditorialProject
+              index="3.3"
+              title="Espacios verdes urbanos"
+              caption="Biowater · Taller intergeneracional"
+              link={{
+                href: 'https://replantegem.cat/biowater/',
+                label: 'Ver proyecto Biowater',
+              }}
+              media={
+                <Image
+                  src="/media/biowater-seniors.jpg"
+                  alt="Taller intergeneracional sobre espacios verdes"
+                  fill
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                />
+              }
+            >
+              <p>
+                Procesos intergeneracionales para pensar agua, biodiversidad,
+                bienestar y adaptación climática desde experiencias diversas.
+              </p>
+            </EditorialProject>
+          </div>
+        </section>
+
+        <section
+          id="investigacion"
+          className="chapter chapter--editorial chapter--editorial-tint"
+        >
+          <EditorialChapterHeading
+            index="4"
+            title="Investigación"
+          />
+          <div className="editorial-project-list">
+            <EditorialProject
+              index="4.1"
+              title="Cuerpa, ciudad y relato urbano"
+              caption="CUERPAS · Colombia 2023"
+              media={
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  poster="/media/cuerpas-poster-user.png"
+                  aria-label="Fragmento audiovisual del proyecto CUERPAS"
+                >
+                  <source src="/media/cuerpas-colombia.mp4" type="video/mp4" />
+                </video>
+              }
+              link={{
+                href: 'https://www.instagram.com/cuerpasdocu/',
+                label: 'Ver CUERPAS en Instagram',
+              }}
+            >
+              <p>
+                Conversaciones y recorridos con grafiteras, poetas y artistas
+                sobre cómo las mujeres habitan, narran y transforman la ciudad.
+              </p>
+            </EditorialProject>
+          </div>
+        </section>
+
+        <section
+          id="app-digital"
+          className="chapter chapter--editorial chapter--paper"
+        >
+          <EditorialChapterHeading
+            index="5"
+            title="Apps sociales"
+          />
+          <div className="editorial-project-list">
+            <EditorialProject
+              index="5.1"
+              title="xibarri"
+              caption="xibarri · App ciudadana"
+              media={
+                <Image
+                  src="/media/xibarri/xibarri-four-screens-white.png"
+                  alt="Cuatro pantallas de xibarri: incidencia, mapa, ranking y perfil"
+                  fill
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                  className="xibarri-four-screens"
+                />
+              }
+              link={{
+                href: 'https://xibarri.com/es/',
+                label: 'Descubrir xibarri',
+              }}
+            >
+              <p>
+                Diseñamos herramientas digitales que conectan ciudadanía y
+                territorio. xibarri permite localizar, compartir y seguir
+                propuestas e incidencias del barrio.
+              </p>
+            </EditorialProject>
+          </div>
+        </section>
       </div>
 
-      <div id="about-us" className="bg-black py-20">
-        <Container>
-          <FadeIn>
-            <div className="w-full gap-8 space-y-4 text-white sm:flex sm:space-y-0">
-              <div className="w-full sm:w-1/3">
-                <Image
-                  className="aspect-1 w-full object-cover grayscale"
-                  src={laura}
-                  alt="Laura Mayer"
-                />
-                <h3 className="mt-6 inline-flex items-center text-lg font-semibold leading-8">
-                  Laura Mayer, Founder
-                </h3>
-                <p className="pre text-base leading-7">
-                  laura@purplestreet.xyz
-                </p>
-                <div className="mt-4 flex items-center gap-2">
-                  <a
-                    href="https://www.linkedin.com/in/lauramayermarcen/"
-                    className=""
-                  >
-                    <span className="sr-only">LinkedIn</span>
-                    <svg
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                      fill="white"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://www.instagram.com/purplestreet.xyz/"
-                    className=""
-                  >
-                    <span className="sr-only">Instagram</span>
-                    <svg
-                      className="h-5 w-5"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                      fill="white"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465.668.25 1.272.644 1.772 1.153.509.5.902 1.104 1.153 1.772.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.903 4.903 0 0 1-1.153 1.772c-.5.509-1.104.902-1.772 1.153-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.903 4.903 0 0 1-1.772-1.153 4.902 4.902 0 0 1-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 0 1 1.153-1.772A4.902 4.902 0 0 1 5.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63Zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.096 3.096 0 0 0-.748-1.15 3.098 3.098 0 0 0-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058ZM12 6.865a5.135 5.135 0 1 1 0 10.27 5.135 5.135 0 0 1 0-10.27Zm0 1.802a3.333 3.333 0 1 0 0 6.666 3.333 3.333 0 0 0 0-6.666Zm5.338-3.205a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <div className="w-full sm:w-2/3">
-                <p className="text-base leading-7">
-                  Laura began her journey by leading exploratory walks inspired
-                  by the work and life of Jane Jacobs. These walks focused on
-                  observing and understanding everyday urban life from a unique
-                  perspective. As her passion for gender-inclusive urban
-                  planning grew, she partnered with Equal Saree, a team of
-                  feminist architects and urban planners. Together, they
-                  developed the Urbanism & Gender Equality workshops.
-                </p>
-                <p className="mt-4 text-base leading-7">
-                  Her goal is to promote a gender intersectional perspective in
-                  public spaces and educational fields. She believes it&apos;s
-                  crucial to educate the next generation about the importance of
-                  gender equality in urban planning to create more inclusive,
-                  safe, and vibrant communities. Join Laura in her mission to
-                  transform our cities and schools for a better future.
-                </p>
-              </div>
-            </div>
-          </FadeIn>
-        </Container>
-      </div>
+      <section id="sobre-mi" className="about-section">
+        <div className="about-photo">
+          <Image
+            src={laura}
+            alt="Laura Mayer, arquitecta y urbanista"
+            fill
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            className="object-cover grayscale"
+          />
+        </div>
+        <div className="about-copy">
+          <h2>Arquitecta y urbanista feminista</h2>
+          <div>
+            <p>
+              Me formé en arquitectura y urbanismo y cursé un máster en estudios
+              de género para trabajar la ciudad desde una mirada feminista
+              interseccional.
+            </p>
+            <p>
+              He desarrollado proyectos en España, Alemania, Suiza y Colombia
+              junto a equipos de arquitectura, arte, ecología, instituciones
+              públicas y organizaciones comunitarias.
+            </p>
+          </div>
+          <a
+            href="/manifesto"
+            className="text-link editorial-project__link"
+          >
+            Leer el manifiesto <Arrow />
+          </a>
+        </div>
+      </section>
 
-      <Testimonial
-        className="mt-10"
-        client={{
-          name: 'University of Fribourg',
-          logo: logoUniversityOfFribourg,
-        }}
-      >
-        Having Laura Mayer in my MA-seminar on Built Communities here at the
-        Social Anthropology Unit of the University of Fribourg was a great
-        experience for me and my students. Laura’s enthusiastic, knowledgeable
-        and engaged way of leading the 3-hour session on gender and urbanism was
-        fantastic!
-      </Testimonial>
-
-      <div id="contact">
-        <ContactSection />
-      </div>
+      <section id="contacto" className="contact-section">
+        <h2>Contacto</h2>
+        <div className="contact-links">
+          <a href="mailto:laura@purplestreet.xyz">laura@purplestreet.xyz</a>
+          <a
+            href="https://www.instagram.com/purplestreet.xyz/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Instagram <Arrow />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/lauramayermarcen/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn <Arrow />
+          </a>
+        </div>
+      </section>
     </>
   )
 }
