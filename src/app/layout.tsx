@@ -6,8 +6,8 @@ import '@/styles/global.css'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s · Purple Street',
-    default: 'Purple Street · Urbanismo feminista y participativo',
+    template: '%s · purple street',
+    default: 'purple street',
   },
   description:
     'Urbanismo feminista, procesos participativos y herramientas para crear espacios más inclusivos, amables y cuidadores.',

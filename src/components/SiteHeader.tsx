@@ -4,17 +4,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-const navigation = [
-  { href: '/#que-hacemos', label: 'Qué hacemos' },
-  { href: '/#sobre-mi', label: 'Sobre mí' },
-]
+import { useLanguage } from '@/components/LanguageProvider'
+import { localeNames, locales, type Locale } from '@/lib/i18n'
 
-function BrandLink({ onClick }: { onClick?: () => void }) {
+function BrandLink({
+  label,
+  onClick,
+}: {
+  label: string
+  onClick?: () => void
+}) {
   return (
     <Link
       className="site-nav__button site-nav__brand"
       href="/"
-      aria-label="Purple Street — inicio"
+      aria-label={label}
       onClick={onClick}
     >
       <Image
@@ -28,14 +32,20 @@ function BrandLink({ onClick }: { onClick?: () => void }) {
   )
 }
 
-function InstagramLink({ onClick }: { onClick?: () => void }) {
+function InstagramLink({
+  label,
+  onClick,
+}: {
+  label: string
+  onClick?: () => void
+}) {
   return (
     <a
       className="site-nav__button site-nav__instagram"
-      href="https://www.instagram.com/purplestreet.xyz/"
+      href="https://www.instagram.com/purplestreetorg/"
       target="_blank"
       rel="noreferrer"
-      aria-label="Purple Street en Instagram"
+      aria-label={label}
       onClick={onClick}
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -47,8 +57,36 @@ function InstagramLink({ onClick }: { onClick?: () => void }) {
   )
 }
 
+function LanguageSwitcher({ mobile = false }: { mobile?: boolean }) {
+  const { locale, setLocale, t } = useLanguage()
+
+  return (
+    <div
+      className={`language-switcher${mobile ? ' language-switcher--mobile' : ''}`}
+      role="group"
+      aria-label={t.nav.languageLabel}
+    >
+      {locales.map((item) => (
+        <button
+          key={item}
+          type="button"
+          aria-pressed={locale === item}
+          onClick={() => setLocale(item as Locale)}
+        >
+          {localeNames[item]}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useLanguage()
+  const navigation = [
+    { href: '/#que-hacemos', label: t.nav.whatWeDo },
+    { href: '/#sobre-mi', label: t.nav.about },
+  ]
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -64,10 +102,10 @@ export function SiteHeader() {
   return (
     <header className={`site-header${isOpen ? ' is-menu-open' : ''}`}>
       <div className="site-header__inner">
-        <nav aria-label="Navegación principal">
+        <nav aria-label={t.nav.mainLabel}>
           <ul className="site-nav site-nav--desktop">
             <li className="site-nav__brand-item">
-              <BrandLink />
+              <BrandLink label={t.nav.homeLabel} />
             </li>
             {navigation.map((item) => (
               <li key={item.href}>
@@ -78,16 +116,19 @@ export function SiteHeader() {
             ))}
             <li>
               <Link href="/#contacto" className="site-nav__button is-primary">
-                Contacto
+                {t.nav.contact}
               </Link>
             </li>
             <li>
-              <InstagramLink />
+              <InstagramLink label={t.nav.instagramLabel} />
+            </li>
+            <li>
+              <LanguageSwitcher />
             </li>
           </ul>
 
           <div className="site-nav-mobile">
-            <BrandLink onClick={closeMenu} />
+            <BrandLink label={t.nav.homeLabel} onClick={closeMenu} />
             <button
               type="button"
               className="site-nav-mobile__toggle"
@@ -95,7 +136,7 @@ export function SiteHeader() {
               aria-controls="mobile-navigation"
               onClick={() => setIsOpen((open) => !open)}
             >
-              <span>Menú</span>
+              <span>{t.nav.menu}</span>
               <span aria-hidden="true">{isOpen ? '×' : '+'}</span>
             </button>
           </div>
@@ -110,7 +151,7 @@ export function SiteHeader() {
         {navigation.map((item) => (
           <Link key={item.href} href={item.href} onClick={closeMenu}>
             <span>{item.label}</span>
-            <span aria-hidden="true">↗</span>
+            <span className="ui-arrow" aria-hidden="true">↗︎</span>
           </Link>
         ))}
         <Link
@@ -118,13 +159,14 @@ export function SiteHeader() {
           className="mobile-nav-panel__contact"
           onClick={closeMenu}
         >
-          <span>Contacto</span>
-          <span aria-hidden="true">↗</span>
+          <span>{t.nav.contact}</span>
+          <span className="ui-arrow" aria-hidden="true">↗︎</span>
         </Link>
         <div className="mobile-nav-panel__social">
           <span>Instagram</span>
-          <InstagramLink onClick={closeMenu} />
+          <InstagramLink label={t.nav.instagramLabel} onClick={closeMenu} />
         </div>
+        <LanguageSwitcher mobile />
       </div>
     </header>
   )

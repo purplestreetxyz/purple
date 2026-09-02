@@ -24,7 +24,7 @@ function XIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 export const socialMediaProfiles = [
   {
     title: 'Instagram',
-    href: 'https://instagram.com/purplestreet.xyz/',
+    href: 'https://instagram.com/purplestreetorg/',
     icon: InstagramIcon,
   },
   { title: 'X', href: 'https://x.com/purplestreetxyz', icon: XIcon },

@@ -52,8 +52,8 @@ body {
 }
 
 ::selection {
-  background: var(--purple);
-  color: var(--paper);
+  background: var(--lavender);
+  color: var(--ink);
 }
 
 img,
@@ -2243,6 +2243,14 @@ video {
   font-size: 1.35rem;
 }
 
+.ui-arrow,
+.service-card__arrow {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-variant-emoji: text;
+  line-height: 1;
+}
+
 .service-card h3 {
   margin-top: auto;
   font-family: var(--title);
@@ -2429,6 +2437,44 @@ video {
 .site-nav__instagram svg .is-filled {
   fill: currentColor;
   stroke: none;
+}
+
+.language-switcher {
+  display: inline-flex;
+  min-height: 2.35rem;
+  align-items: center;
+  gap: 0.12rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: rgb(251 250 243 / 92%);
+  padding: 0.16rem;
+  backdrop-filter: blur(8px);
+}
+
+.language-switcher button {
+  min-width: 1.85rem;
+  min-height: 1.75rem;
+  border-radius: 999px;
+  padding: 0 0.38rem;
+  color: var(--ink);
+  font-size: 0.58rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  transition:
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.language-switcher button:hover,
+.language-switcher button:focus-visible {
+  background: var(--lavender);
+  outline: 0;
+}
+
+.language-switcher button[aria-pressed='true'] {
+  background: var(--purple);
+  color: white;
 }
 
 .site-nav__button.is-primary {
@@ -2711,6 +2757,17 @@ video {
     display: inline-flex;
   }
 
+  .language-switcher--mobile {
+    width: calc(100% - 1.1rem);
+    margin: 0.55rem;
+  }
+
+  .language-switcher--mobile button {
+    min-height: 2.35rem;
+    flex: 1;
+    font-size: 0.7rem;
+  }
+
   .manifesto-page .street-manifest-copy {
     padding-top: 7rem;
   }
@@ -2979,7 +3036,7 @@ video {
 
 .editorial-project__media:has(.xibarri-four-screens) {
   aspect-ratio: 2 / 1;
-  background: white;
+  background: transparent;
 }
 
 .editorial-project__media img.xibarri-four-screens {
