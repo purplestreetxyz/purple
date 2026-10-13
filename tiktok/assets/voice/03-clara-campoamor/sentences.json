@@ -1,0 +1,92 @@
+{
+  "provider": "gtts",
+  "options": {},
+  "tempo": 1.16,
+  "duration": 64.86,
+  "sentences": [
+    {
+      "index": 0,
+      "text": "En 1931, una mujer podía ser diputada en España, pero no podía votar.",
+      "spoken": "En 1931, una mujer podía ser diputada en España, pero no podía votar.",
+      "start": 0.35,
+      "end": 6.596
+    },
+    {
+      "index": 1,
+      "text": "Una de esas diputadas se llamaba Clara Campoamor, y decidió cambiarlo todo.",
+      "spoken": "Una de esas diputadas se llamaba Clara Campoamor, y decidió cambiarlo todo.",
+      "start": 6.996,
+      "end": 11.987
+    },
+    {
+      "index": 2,
+      "text": "Abogada, hija de una familia trabajadora de Madrid y harta de ser ciudadana de segunda, llegó a las Cortes con una idea clara: el voto femenino.",
+      "spoken": "Abogada, hija de una familia trabajadora de Madrid y harta de ser ciudadana de segunda, llegó a las Cortes con una idea clara: el voto femenino.",
+      "start": 12.237,
+      "end": 22.01
+    },
+    {
+      "index": 3,
+      "text": "Lo sorprendente es que la oposición más dura no vino solo de los hombres.",
+      "spoken": "Lo sorprendente es que la oposición más dura no vino solo de los hombres.",
+      "start": 22.26,
+      "end": 26.38
+    },
+    {
+      "index": 4,
+      "text": "Muchos de sus propios compañeros, e incluso otra diputada, Victoria Kent, creían que las mujeres aún no estábamos preparadas.",
+      "spoken": "Muchos de sus propios compañeros, e incluso otra diputada, Victoria Kent, creían que las mujeres aún no estábamos preparadas.",
+      "start": 26.63,
+      "end": 35.414
+    },
+    {
+      "index": 5,
+      "text": "Clara se plantó y defendió en el Parlamento que la libertad se aprende ejerciéndola.",
+      "spoken": "Clara se plantó y defendió en el Parlamento que la libertad se aprende ejerciéndola.",
+      "start": 35.664,
+      "end": 40.48
+    },
+    {
+      "index": 6,
+      "text": "El 1 de octubre de 1931 ganó la votación, y en 1933 las españolas votamos por primera vez.",
+      "spoken": "El 1 de octubre de 1931 ganó la votación, y en 1933 las españolas votamos por primera vez.",
+      "start": 40.73,
+      "end": 49.092
+    },
+    {
+      "index": 7,
+      "text": "¿Su recompensa?",
+      "spoken": "¿Su recompensa?",
+      "start": 49.442,
+      "end": 50.501
+    },
+    {
+      "index": 8,
+      "text": "Quedarse sin partido y, después, el exilio.",
+      "spoken": "Quedarse sin partido y, después, el exilio.",
+      "start": 50.851,
+      "end": 54.379
+    },
+    {
+      "index": 9,
+      "text": "Murió en Suiza en 1972.",
+      "spoken": "Murió en Suiza en 1972.",
+      "start": 54.629,
+      "end": 57.533
+    },
+    {
+      "index": 10,
+      "text": "Si quieres saber más, os recomiendo su libro Mi pecado mortal.",
+      "spoken": "Si quieres saber más, os recomiendo su libro Mi pecado mortal.",
+      "start": 57.883,
+      "end": 61.881
+    },
+    {
+      "index": 11,
+      "text": "Cada vez que votamos, ella está ahí.",
+      "spoken": "Cada vez que votamos, ella está ahí.",
+      "start": 62.251,
+      "end": 64.61
+    }
+  ]
+}

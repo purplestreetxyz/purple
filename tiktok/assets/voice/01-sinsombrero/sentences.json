@@ -1,0 +1,85 @@
+{
+  "provider": "gtts",
+  "options": {},
+  "tempo": 1.12,
+  "duration": 61.532,
+  "sentences": [
+    {
+      "index": 0,
+      "text": "Madrid, años 20.",
+      "spoken": "Madrid, años 20.",
+      "start": 0.35,
+      "end": 2.135
+    },
+    {
+      "index": 1,
+      "text": "Quitarte el sombrero en plena Puerta del Sol podía costarte una lluvia de piedras.",
+      "spoken": "Quitarte el sombrero en plena Puerta del Sol podía costarte una lluvia de piedras.",
+      "start": 2.535,
+      "end": 7.492
+    },
+    {
+      "index": 2,
+      "text": "Y eso es exactamente lo que les pasó a Maruja Mallo y Margarita Manso.",
+      "spoken": "Y eso es exactamente lo que les pasó a Maruja Mallo y Margarita Manso.",
+      "start": 7.772,
+      "end": 12.601
+    },
+    {
+      "index": 3,
+      "text": "Un día, paseando con sus amigos Lorca y Dalí, decidieron quitárselo.",
+      "spoken": "Un día, paseando con sus amigos Lorca y Dalí, decidieron quitárselo.",
+      "start": 12.881,
+      "end": 18.157
+    },
+    {
+      "index": 4,
+      "text": "Para ellas, el sombrero era un símbolo de todo lo que las mantenía encorsetadas.",
+      "spoken": "Para ellas, el sombrero era un símbolo de todo lo que las mantenía encorsetadas.",
+      "start": 18.437,
+      "end": 23.634
+    },
+    {
+      "index": 5,
+      "text": "La gente que pasaba las insultó y les tiró piedras, porque una mujer con la cabeza descubierta en la calle era un escándalo.",
+      "spoken": "La gente que pasaba las insultó y les tiró piedras, porque una mujer con la cabeza descubierta en la calle era un escándalo.",
+      "start": 23.914,
+      "end": 31.858
+    },
+    {
+      "index": 6,
+      "text": "Pero ellas no pararon.",
+      "spoken": "Pero ellas no pararon.",
+      "start": 32.238,
+      "end": 33.653
+    },
+    {
+      "index": 7,
+      "text": "Pintoras, escritoras y pensadoras como Maruja Mallo, Concha Méndez, María Zambrano o Rosa Chacel formaron parte de la Generación del 27, aunque los libros de texto solo nos hablaron de ellos.",
+      "spoken": "Pintoras, escritoras y pensadoras como Maruja Mallo, Concha Méndez, María Zambrano o Rosa Chacel formaron parte de la Generación del 27, aunque los libros de texto solo nos hablaron de ellos.",
+      "start": 33.933,
+      "end": 48.304
+    },
+    {
+      "index": 8,
+      "text": "¿Lo mejor?",
+      "spoken": "¿Lo mejor?",
+      "start": 48.704,
+      "end": 49.318
+    },
+    {
+      "index": 9,
+      "text": "Hoy las recuperamos con el nombre que les pusieron para burlarse: las Sinsombrero.",
+      "spoken": "Hoy las recuperamos con el nombre que les pusieron para burlarse: las Sinsombrero.",
+      "start": 49.698,
+      "end": 55.023
+    },
+    {
+      "index": 10,
+      "text": "Y nos recuerdan que ocupar la calle, tal y como somos, siempre ha sido un acto político.",
+      "spoken": "Y nos recuerdan que ocupar la calle, tal y como somos, siempre ha sido un acto político.",
+      "start": 55.303,
+      "end": 61.252
+    }
+  ]
+}
