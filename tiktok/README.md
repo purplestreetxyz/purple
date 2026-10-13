@@ -6,9 +6,9 @@ Wikimedia Commons, a synthesized Spain-Spanish voiceover, word-synced captions a
 
 | Video | Duration | Config | Output (1080×1920) | Web version (720×1280) |
 |---|---|---|---|---|
-| Las Sinsombrero | 65.7 s | `videos/01-sinsombrero.json` | `output/01-sinsombrero.mp4` (30 MB) | `output/web/01-sinsombrero-720p.mp4` (10 MB) |
-| Margarete Schütte-Lihotzky | 62.7 s | `videos/02-schutte-lihotzky.json` | `output/02-schutte-lihotzky.mp4` (24 MB) | `output/web/02-schutte-lihotzky-720p.mp4` (7 MB) |
-| Clara Campoamor | 69.2 s | `videos/03-clara-campoamor.json` | `output/03-clara-campoamor.mp4` (22 MB) | `output/web/03-clara-campoamor-720p.mp4` (7 MB) |
+| Las Sinsombrero | ~49 s | `videos/01-sinsombrero.json` | `output/01-sinsombrero.mp4` | `output/web/01-sinsombrero-720p.mp4` |
+| Margarete Schütte-Lihotzky | ~48 s | `videos/02-schutte-lihotzky.json` | `output/02-schutte-lihotzky.mp4` | `output/web/02-schutte-lihotzky-720p.mp4` |
+| Clara Campoamor | ~55 s | `videos/03-clara-campoamor.json` | `output/03-clara-campoamor.mp4` | `output/web/03-clara-campoamor-720p.mp4` |
 
 Image, voice and music sources with licenses: [`CREDITS.md`](CREDITS.md).
 
@@ -17,8 +17,10 @@ Image, voice and music sources with licenses: [`CREDITS.md`](CREDITS.md).
 - Python 3.10+ and FFmpeg (with libx264) on `PATH`.
 - `pip install -r requirements.txt`
 
-No API keys are needed. The Whisper `small` model (~500 MB) is downloaded on first use of the
-alignment step.
+Voiceovers use ElevenLabs **Laura 1** (`Io5OWgIEXStywKwU9Gkc`) by default. Re-synthesizing the
+voice needs `ELEVENLABS_API_KEY` in the environment. Image fetch and re-render reuse the committed
+`assets/voice/` files and need no key. The Whisper `small` model (~500 MB) is downloaded on first
+use of the alignment step.
 
 ## Re-render
 
@@ -50,9 +52,11 @@ Rendering takes about 2–3 minutes per video on 4 CPU cores (`--workers` contro
 Everything about a video lives in its JSON config:
 
 - `script`: the exact voiceover text. Captions use these words verbatim.
-- `tts`: `provider` (`gtts`, `edge`, `piper`), `tempo` per provider, `gap` between sentences,
-  `extra_pause_after` (sentence index → extra seconds), and `say` (pronunciation respellings used
-  only for the TTS, e.g. `"Schütte-Lihotzky": "Shute-Lijotski"`; keep the word count the same).
+- `tts`: `provider` (`elevenlabs`, `gtts`, `edge`, `piper`), `tempo` per provider, `gap` between
+  sentences, `extra_pause_after` (sentence index → extra seconds), and `say` (pronunciation
+  respellings used only for the TTS, e.g. `"Schütte-Lihotzky": "Shute-Lijotski"`; keep the word
+  count the same). For `elevenlabs`, set `tts.elevenlabs.voice_id` / `model_id` (defaults to
+  Laura 1 + `eleven_multilingual_v2`) and export `ELEVENLABS_API_KEY`.
 - `music`: `style` (`jazz`, `minimal`, `epic`), `bpm`, `key` (MIDI note), `seed`; `music_volume`.
 - `scenes`: the visual timeline. Each scene starts when the phrase in `at` is spoken, so scenes stay
   in sync if the voice is re-generated. Types:
@@ -74,13 +78,14 @@ After adding a new Commons file, run `python -m pipeline.commons <id>` and then 
 
 | Provider | Voice | Notes |
 |---|---|---|
-| `gtts` (default) | Google Translate TTS, Spain-Spanish female | Most natural of the keyless options tested here. Unofficial endpoint, so review Google's terms before commercial use. |
-| `edge` | Microsoft `es-ES-ElviraNeural` | Very natural neural voice with no key, but Microsoft blocks many datacenter IPs (it returned 403 on the build server). Try it from a home connection: `python -m pipeline.build 01 --steps voice,align,music,render --provider edge`. |
+| `elevenlabs` (default) | ElevenLabs Laura 1 (`Io5OWgIEXStywKwU9Gkc`) | Needs `ELEVENLABS_API_KEY`. Model `eleven_multilingual_v2`. Re-run with `python -m pipeline.build --steps voice,align,music,render --provider elevenlabs`. |
+| `gtts` | Google Translate TTS, Spain-Spanish female | Keyless. Unofficial endpoint; review Google's terms before commercial use. |
+| `edge` | Microsoft `es-ES-ElviraNeural` | Keyless, but Microsoft blocks many datacenter IPs (403 on the build server). |
 | `piper` | Piper `es_ES-sharvard-medium`, speaker F | Fully offline, CC BY 3.0 training data. Slightly more synthetic. |
 
-To use a professional voice (e.g. ElevenLabs or Azure), record or export one audio file per
-sentence, or the whole read, into `assets/voice/<id>/voice.flac`. Update `sentences.json` with
-the sentence start/end times, then run `python -m pipeline.align <id>` and render.
+To drop in a pre-recorded read, put `assets/voice/<id>/voice.flac`, update `sentences.json` with
+sentence start/end times (or rebuild `words.json` with Whisper), then run
+`python -m pipeline.align <id>` and render.
 
 ## Brand
 

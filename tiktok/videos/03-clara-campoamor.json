@@ -2,10 +2,11 @@
   "title": "Clara Campoamor",
   "script": "En 1931, una mujer podía ser diputada en España, pero no podía votar. Una de esas diputadas se llamaba Clara Campoamor, y decidió cambiarlo todo. Abogada, hija de una familia trabajadora de Madrid y harta de ser ciudadana de segunda, llegó a las Cortes con una idea clara: el voto femenino. Lo sorprendente es que la oposición más dura no vino solo de los hombres. Muchos de sus propios compañeros, e incluso otra diputada, Victoria Kent, creían que las mujeres aún no estábamos preparadas. Clara se plantó y defendió en el Parlamento que la libertad se aprende ejerciéndola. El 1 de octubre de 1931 ganó la votación, y en 1933 las españolas votamos por primera vez. ¿Su recompensa? Quedarse sin partido y, después, el exilio. Murió en Suiza en 1972. Si quieres saber más, os recomiendo su libro Mi pecado mortal. Cada vez que votamos, ella está ahí.",
   "tts": {
-    "provider": "gtts",
+    "provider": "elevenlabs",
+    "elevenlabs": {"voice_id": "Io5OWgIEXStywKwU9Gkc", "voice_name": "Laura 1", "model_id": "eleven_multilingual_v2"},
     "gap": 0.25,
     "extra_pause_after": {"0": 0.15, "6": 0.1, "7": 0.1, "9": 0.1, "10": 0.12},
-    "tempo": {"gtts": 1.16, "piper": 1.0, "edge": 1.0},
+    "tempo": {"gtts": 1.16, "piper": 1.0, "edge": 1.0, "elevenlabs": 1.0},
     "say": {}
   },
   "music": {"style": "epic", "bpm": 76, "key": 60, "seed": 31},

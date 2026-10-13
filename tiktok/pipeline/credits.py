@@ -28,6 +28,7 @@ VOICES = {
             "Not an official Google API; review Google's terms before commercial use.",
     "edge": "Microsoft Edge neural voice es-ES-ElviraNeural (via edge-tts).",
     "piper": "Piper TTS, voice es_ES-sharvard-medium (speaker F), trained on the Sharvard corpus (CC BY 3.0).",
+    "elevenlabs": "ElevenLabs TTS, voice Laura 1 (`Io5OWgIEXStywKwU9Gkc`), model eleven_multilingual_v2.",
 }
 
 

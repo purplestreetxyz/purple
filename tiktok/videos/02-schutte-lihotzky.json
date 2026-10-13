@@ -2,10 +2,11 @@
   "title": "Margarete Schütte-Lihotzky",
   "script": "Imagina que tu cocina la diseñó una mujer que después se enfrentó a los nazis. Se llamaba Margarete Schütte-Lihotzky y fue la primera arquitecta de Austria. En 1926, en Frankfurt, diseñó la famosa cocina de Frankfurt: un espacio pequeño y funcional, pensado para que las mujeres trabajadoras perdieran menos horas en las tareas de casa. Fue el origen de la cocina moderna que hoy tenemos casi todas. Pero Margarete no solo pensaba en armarios y encimeras. Durante el nazismo se unió a la resistencia, la detuvieron y pasó años en prisión. Sobrevivió y siguió diseñando escuelas y guarderías, convencida de que la arquitectura podía hacernos la vida más justa. Vivió hasta los 102 años. Así que la próxima vez que cocines, piensa en ella. Y pregúntate: ¿quién diseña los espacios donde vivimos, y para quién?",
   "tts": {
-    "provider": "gtts",
+    "provider": "elevenlabs",
+    "elevenlabs": {"voice_id": "Io5OWgIEXStywKwU9Gkc", "voice_name": "Laura 1", "model_id": "eleven_multilingual_v2"},
     "gap": 0.28,
     "extra_pause_after": {"0": 0.15, "3": 0.1, "7": 0.15, "8": 0.1},
-    "tempo": {"gtts": 1.12, "piper": 1.0, "edge": 1.0},
+    "tempo": {"gtts": 1.12, "piper": 1.0, "edge": 1.0, "elevenlabs": 1.0},
     "say": {"Schütte-Lihotzky": "Shute-Lijotski"}
   },
   "music": {"style": "minimal", "bpm": 100, "key": 64, "seed": 23},

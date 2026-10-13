@@ -1,10 +1,11 @@
 """Synthesize the voiceover sentence by sentence and assemble it with controlled pauses.
 
 Providers (pick with --provider or "tts.provider" in the video config):
-  gtts   Google Translate TTS, Spain-Spanish female (lang=es, tld=es). No key needed. Default.
-  edge   Microsoft Edge neural voice es-ES-ElviraNeural via edge-tts. No key needed, but the
-         endpoint rejects many datacenter IPs (403); works from most home connections.
-  piper  Offline Piper voice es_ES-sharvard-medium, speaker F (CC BY 3.0 dataset).
+  gtts        Google Translate TTS, Spain-Spanish female (lang=es, tld=es). No key needed. Default.
+  edge        Microsoft Edge neural voice es-ES-ElviraNeural via edge-tts. No key needed, but the
+              endpoint rejects many datacenter IPs (403); works from most home connections.
+  piper       Offline Piper voice es_ES-sharvard-medium, speaker F (CC BY 3.0 dataset).
+  elevenlabs  ElevenLabs TTS (Laura 1 by default). Needs ELEVENLABS_API_KEY in the environment.
 
 Writes assets/voice/<id>/voice.flac and sentences.json (sentence text + start/end seconds).
 """
@@ -13,8 +14,11 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import subprocess
 import tempfile
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 import numpy as np
@@ -23,6 +27,8 @@ from .common import BUILD, VOICE, load_video, split_sentences
 
 SR = 44100
 PIPER_URL = "https://huggingface.co/rhasspy/piper-voices/resolve/main/es/es_ES/sharvard/medium/"
+ELEVENLABS_DEFAULT_VOICE = "Io5OWgIEXStywKwU9Gkc"  # Laura 1
+ELEVENLABS_DEFAULT_MODEL = "eleven_multilingual_v2"
 
 
 def _decode(path: Path, tempo: float = 1.0) -> np.ndarray:
@@ -80,7 +86,51 @@ def synth_piper(text: str, out: Path, opts: dict) -> None:
     )
 
 
-PROVIDERS = {"gtts": synth_gtts, "edge": synth_edge, "piper": synth_piper}
+def synth_elevenlabs(text: str, out: Path, opts: dict) -> None:
+    api_key = opts.get("api_key") or os.environ.get("ELEVENLABS_API_KEY")
+    if not api_key:
+        raise SystemExit(
+            "elevenlabs provider needs ELEVENLABS_API_KEY in the environment "
+            "(or tts.elevenlabs.api_key in the video config)."
+        )
+    voice_id = opts.get("voice_id", ELEVENLABS_DEFAULT_VOICE)
+    model_id = opts.get("model_id", ELEVENLABS_DEFAULT_MODEL)
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+    body = json.dumps({
+        "text": text,
+        "model_id": model_id,
+        "voice_settings": {
+            "stability": float(opts.get("stability", 0.4)),
+            "similarity_boost": float(opts.get("similarity_boost", 0.75)),
+            "style": float(opts.get("style", 0.2)),
+            "use_speaker_boost": bool(opts.get("use_speaker_boost", True)),
+        },
+    }).encode()
+    req = urllib.request.Request(
+        url,
+        data=body,
+        method="POST",
+        headers={
+            "xi-api-key": api_key,
+            "Content-Type": "application/json",
+            "Accept": "audio/mpeg",
+        },
+    )
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                out.write_bytes(resp.read())
+            return
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", "replace")[:300]
+            if attempt == 4 or exc.code not in (429, 500, 502, 503):
+                raise SystemExit(f"ElevenLabs HTTP {exc.code}: {detail}") from exc
+            print(f"  ElevenLabs retry ({exc.code}): {detail}")
+            import time
+            time.sleep(3 * (attempt + 1))
+
+
+PROVIDERS = {"gtts": synth_gtts, "edge": synth_edge, "piper": synth_piper, "elevenlabs": synth_elevenlabs}
 
 
 def spoken_text(sentence: str, say: dict) -> str:
@@ -111,7 +161,8 @@ def build_voice(video_id: str, provider: str | None = None) -> Path:
     with tempfile.TemporaryDirectory() as tmp:
         for i, sentence in enumerate(sentences):
             spoken = spoken_text(sentence, tcfg.get("say", {}))
-            raw = Path(tmp) / f"s{i:02d}.{'mp3' if provider != 'piper' else 'wav'}"
+            ext = "wav" if provider == "piper" else "mp3"
+            raw = Path(tmp) / f"s{i:02d}.{ext}"
             synth(spoken, raw, opts)
             audio = _decode(raw, tempo)
             meta.append({"index": i, "text": sentence, "spoken": spoken, "start": round(t, 3),
