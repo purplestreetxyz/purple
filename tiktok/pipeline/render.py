@@ -19,7 +19,7 @@ from .common import (BRAND, BUILD, CREAM, DEEP, FONT_DISPLAY, FONT_TEXT, FPS, H,
                      PURPLE, VIOLET, VOICE, W, WEBSITE, load_video, norm_token)
 from .commons import local_name
 
-CAPTION_Y = 1330          # vertical centre of the caption block (inside TikTok's safe area)
+CAPTION_Y = 1400          # vertical centre of the caption block (inside TikTok's safe area)
 CAPTION_MAX_W = 900
 CAPTION_SIZE = 96
 LABEL_Y = 300
@@ -95,7 +95,7 @@ def grain_tiles() -> list[Image.Image]:
 
 
 def add_grain(img: Image.Image, frame: int, amount: float = 0.5) -> Image.Image:
-    g = grain_tiles()[(frame // 2) % 6].convert("RGB")
+    g = grain_tiles()[(frame // 3) % 6].convert("RGB")
     return ImageChops.blend(img, ImageChops.overlay(img, g), amount)
 
 
@@ -631,7 +631,7 @@ class Renderer:
             prev = scenes[idx - 1]
             pimg = self.scene_frame(prev, t - prev["start"], n)
             img = Image.blend(pimg, img, ease_in_out((t - cur["start"]) / XFADE))
-        img = add_grain(img, n, 0.35)
+        img = add_grain(img, n, 0.2)
         if not cur.get("hide_captions") and cur["type"] != "outro":
             light = cur["type"] == "card" and cur.get("style") == "cream"
             self.draw_captions(img, t, cur.get("caption_y", CAPTION_Y), light)
@@ -652,18 +652,22 @@ def _frame(n):
 
 # ----------------------------------------------------------------------------- audio + encode
 
-def mix_audio(cfg: dict, total: float, out: Path) -> None:
+def mix_audio(cfg: dict, timeline: dict, out: Path) -> None:
+    """Voice + music. Music is ducked under the voice (sidechain) and swells on the closing card."""
+    total = timeline["total"]
+    outro = timeline["scenes"][-1]["start"]
     voice = VOICE / cfg["id"] / "voice.flac"
     music = MUSIC / f"{cfg['id']}.flac"
-    mvol = cfg.get("music_volume", 0.30)
-    fade_out = total - 1.6
+    bed = cfg.get("music_volume", 0.24)
+    swell = cfg.get("outro_music_volume", 0.9)
+    vol = f"if(lt(t,{outro - 0.3:.3f}),{bed},{bed}+({swell}-{bed})*min(1,(t-{outro - 0.3:.3f})/0.8))"
     graph = (
         f"[0:a]aresample=44100,apad,atrim=0:{total:.3f},asplit=2[v][sc];"
-        f"[1:a]aresample=44100,atrim=0:{total:.3f},volume={mvol},afade=t=in:d=0.6,"
-        f"afade=t=out:st={fade_out:.3f}:d=1.6[m];"
-        f"[m][sc]sidechaincompress=threshold=0.03:ratio=4:attack=15:release=350:makeup=1[md];"
+        f"[1:a]aresample=44100,apad,atrim=0:{total:.3f},volume='{vol}':eval=frame,afade=t=in:d=1.2,"
+        f"afade=t=out:st={total - 1.4:.3f}:d=1.4[m];"
+        f"[m][sc]sidechaincompress=threshold=0.025:ratio=5:attack=15:release=400:makeup=1[md];"
         f"[v][md]amix=inputs=2:duration=first:normalize=0,"
-        f"loudnorm=I=-14:TP=-1.2:LRA=9,aresample=44100[a]"
+        f"loudnorm=I=-14:TP=-1.2:LRA=11,aresample=44100[a]"
     )
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(voice), "-i", str(music), "-filter_complex", graph,
                     "-map", "[a]", "-ac", "2", "-ar", "44100", "-c:a", "pcm_s16le", str(out)], check=True)
@@ -690,12 +694,12 @@ def render(video_id: str, workers: int = 3, preview: str | None = None, web: boo
     BUILD.mkdir(exist_ok=True)
     OUTPUT.mkdir(exist_ok=True)
     audio = BUILD / f"{cfg['id']}-mix.wav"
-    mix_audio(cfg, tl["total"], audio)
+    mix_audio(cfg, tl, audio)
     out = OUTPUT / f"{cfg['id']}.mp4"
     enc = subprocess.Popen(
         ["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
          "-i", "-", "-i", str(audio), "-map", "0:v", "-map", "1:a",
-         "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-profile:v", "high", "-pix_fmt", "yuv420p",
+         "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-profile:v", "high", "-pix_fmt", "yuv420p",
          "-c:a", "aac", "-b:a", "192k", "-ar", "44100", "-movflags", "+faststart", "-shortest", str(out)],
         stdin=subprocess.PIPE)
     print(f"  rendering {n_frames} frames ({tl['total']:.1f}s) with {workers} workers")
