@@ -11,8 +11,8 @@
   "music": {"style": "minimal", "bpm": 100, "key": 64, "seed": 23},
   "music_volume": 0.24,
   "scenes": [
-    {"type": "intro", "title": ["LA MUJER QUE", "DISEÑÓ TU COCINA"], "kicker": "Herstory · Viena · Frankfurt", "bottom": ["PURPLE STREET"],
-     "file": "SchutteLihotzky FrankfurtKitchen MIA 2004195 002.jpg", "focus": [0.5, 0.5], "caption_y": 700},
+    {"type": "image", "file": "SchutteLihotzky FrankfurtKitchen MIA 2004195 002.jpg", "layout": "full",
+     "focus": [0.5, 0.4], "focus_end": [0.5, 0.55], "zoom": [1.05, 1.15]},
     {"at": "Se llamaba", "type": "image", "file": "Salini, Lino-Schütte-Lihotzky, Margarete-1927.jpg", "layout": "poster",
      "grade": "color", "focus": [0.5, 0.4], "zoom": [1.0, 1.12],
      "label": {"name": "Margarete Schütte-Lihotzky", "info": "Retrato de Lino Salini, 1927"}},

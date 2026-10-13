@@ -21,7 +21,7 @@ BUILD = ROOT / "build"  # scratch space, git-ignored
 W, H, FPS = 1080, 1920, 30
 
 # Brand palette, sampled from the Instagram avatar/poster and purplestreet.org.
-VIOLET = (155, 107, 232)       # #9B6BE8 avatar background
+VIOLET = (169, 116, 240)       # #A974F0 avatar background (assets/brand/avatar.jpg)
 PURPLE = (94, 42, 132)         # #5E2A84 poster background
 DEEP = (30, 15, 51)            # #1E0F33 shadow tone for duotones
 CREAM = (247, 239, 223)        # #F7EFDF poster type / paper

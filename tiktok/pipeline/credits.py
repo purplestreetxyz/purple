@@ -56,7 +56,8 @@ def main() -> None:
             out.append(f"| {k} | {title}{flag} | {author} | {date} | {lic} | [Commons]({s['page']}) |")
         out.append("")
     out += ["## Brand, fonts and tools", "",
-            "- Purple Street logo and cat-eye glasses mark: from purplestreet.org (brand owner's own assets).",
+            "- Purple Street ink-illustration avatar (`assets/brand/avatar.jpg`, closing card logo): "
+            "brand owner's own artwork.",
             "- Archivo Black (Omnibus-Type) and Inter (Rasmus Andersson): SIL Open Font License 1.1, see `assets/fonts/`.",
             "- Word timing: faster-whisper (MIT), model `small` (OpenAI Whisper weights, MIT).",
             "- Rendering: Pillow, NumPy, FFmpeg.", "",

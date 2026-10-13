@@ -1,4 +1,4 @@
-"""Render a video: scenes (images / cards / intro / outro) + word-synced captions + audio mix.
+"""Render a video: scenes (images / cards / outro) + word-synced captions + audio mix.
 
 Frames are drawn with Pillow in worker processes and piped to ffmpeg (H.264 + AAC).
 """
@@ -286,8 +286,6 @@ class Renderer:
                 img = self.image_poster(sc, t, dur)
         elif kind == "card":
             img = self.card(sc, t, dur)
-        elif kind == "intro":
-            img = self.intro(sc, t, dur)
         elif kind == "outro":
             img = self.outro(sc, t, dur)
         else:
@@ -440,108 +438,54 @@ class Renderer:
                 for line in sc["sub"] if isinstance(sc["sub"], list) else [sc["sub"]]:
                     d.text((W / 2, y + 30 + (1 - p) * 20), line, font=sf, fill=sc_col, anchor="ma")
                     y += 62
-        if sc.get("glasses"):
-            self.paste_glasses(img, W // 2, sc.get("glasses_y", 380), 360, t)
         return img
 
-    def glasses(self, width: int, color) -> Image.Image:
-        key = ("glasses", width, color)
+    def avatar(self, size: int) -> Image.Image:
+        key = ("avatar", size)
         if key not in self._cache:
-            g = Image.open(BRAND / "purple-glasses-cursor.png").convert("RGBA")
-            alpha = g.split()[3]
-            lum = g.convert("L")
-            # Black strokes become `color`; the white lens fill becomes transparent.
-            mask = ImageChops.multiply(alpha, ImageOps.invert(lum).point(lambda v: 255 if v > 110 else 0))
-            colored = Image.new("RGBA", g.size, color + (255,))
-            colored.putalpha(mask)
-            h = round(width * g.height / g.width)
-            self._cache[key] = colored.resize((width, h), Image.LANCZOS)
+            a = Image.open(BRAND / "avatar.jpg").convert("RGB").resize((size, size), Image.LANCZOS)
+            # Feather the top edge so the illustration's flat violet melts into the card background.
+            fade = np.clip(np.arange(size, dtype=np.float32) / 90, 0, 1)
+            mask = Image.fromarray((np.repeat(fade[:, None], size, axis=1) * 255).astype(np.uint8), "L")
+            self._cache[key] = (a, mask)
         return self._cache[key]
 
-    def paste_glasses(self, img, cx, cy, width, t, color=INK):
-        p = back_out(t / 0.4)
-        if p <= 0:
-            return
-        g = self.glasses(width, color)
-        gw, gh = max(1, round(g.width * p)), max(1, round(g.height * p))
-        g = g.resize((gw, gh), Image.BICUBIC)
-        angle = (1 - min(1, p)) * -12
-        g = g.rotate(angle, resample=Image.BICUBIC, expand=True)
-        img.paste(g, (cx - g.width // 2, cy - g.height // 2), g)
-
-    def poster_frame(self, img, panel: Image.Image, title_lines: list[str], t: float, kicker: str | None,
-                     handle_lines: list[str] | None = None):
-        """The brand poster: cream sheet, black hairline frame, image panel on top, black title block below."""
-        d = ImageDraw.Draw(img)
-        m = 46
-        d.rectangle([m, m + 110, W - m, H - m - 160], outline=INK, width=6)
-        inner = [m + 26, m + 136, W - m - 26, H - m - 186]
-        # title block
-        tf_sizes = [fit_font(tl, inner[2] - inner[0] - 70, 230) for tl in title_lines]
-        heights = [f.getbbox(tl)[3] - f.getbbox(tl)[1] for f, tl in zip(tf_sizes, title_lines)]
-        block_h = sum(heights) + 40 * (len(title_lines) - 1) + 120
-        by0 = inner[3] - block_h
-        panel_box = (inner[0], inner[1], inner[2], by0 - 22)
-        pw, ph = panel_box[2] - panel_box[0], panel_box[3] - panel_box[1]
-        img.paste(panel.resize((pw, ph)) if panel.size != (pw, ph) else panel, (panel_box[0], panel_box[1]))
-        p = ease_out(t / 0.45)
-        slide = round((1 - p) * 140)
-        d.rectangle([inner[0], by0 + slide, inner[2], inner[3]], fill=INK)
-        y = by0 + 60 + slide
-        for k, (f, tl, h) in enumerate(zip(tf_sizes, title_lines, heights)):
-            q = ease_out((t - 0.12 - 0.1 * k) / 0.35)
-            if q > 0:
-                l, tp, r, b = f.getbbox(tl)
-                tmp = Image.new("L", (r - l + 4, b - tp + 4), 0)
-                ImageDraw.Draw(tmp).text((2 - l, 2 - tp), tl, font=f, fill=255)
-                tmp = tmp.point(lambda v: int(v * q))
-                img.paste(Image.new("RGB", tmp.size, CREAM), ((W - tmp.width) // 2, y + round((1 - q) * 30)), tmp)
-            y += h + 40
-        # strips above and below the frame (poster margin)
-        if kicker:
-            kf = text_font(36, "ExtraBold")
-            tracked(d, (W / 2, m + 40), kicker.upper(), kf, INK, tracking=7, anchor_center=True)
-        if handle_lines:
-            hf = text_font(46, "ExtraBold")
-            for k, hl in enumerate(handle_lines):
-                tracked(d, (W / 2, H - m - 128 + k * 60), hl, hf if k == 0 else text_font(36, "SemiBold"),
-                        INK, tracking=3 if k == 0 else 2, anchor_center=True)
-        return panel_box
-
-    def intro(self, sc, t, dur):
-        img = self.poster_bg(CREAM)
-        m = 46
-        inner_w, inner_h = W - 2 * (m + 26), 1050
-        panel = self.ken_burns(dict(sc, zoom=sc.get("zoom", [1.06, 1.18]), grade=sc.get("grade", "duo")), t, dur + 1,
-                               inner_w, inner_h) if sc.get("file") else solid(VIOLET).resize((inner_w, inner_h))
-        box = self.poster_frame(img, panel, sc["title"], t, sc.get("kicker"), sc.get("bottom"))
-        if sc.get("glasses", True):
-            self.paste_glasses(img, W // 2, box[1] + 130, 330, t - 0.25, color=CREAM)
-        return img
-
     def outro(self, sc, t, dur):
-        img = self.poster_bg(CREAM)
-        m = 46
-        inner_w, inner_h = W - 2 * (m + 26), 1100
-        avatar = BRAND / "avatar.png"
-        if avatar.exists():
-            a = Image.open(avatar).convert("RGB")
-            a = ImageOps.fit(a, (inner_w, inner_h), centering=(0.5, 0.35))
-            z = 1.0 + 0.05 * ease_in_out(t / dur)
-            panel = a.resize((round(inner_w * z), round(inner_h * z))).crop((0, 0, inner_w, inner_h))
-        else:
-            panel = solid(VIOLET).resize((inner_w, inner_h))
-        box = self.poster_frame(img, panel, ["PURPLE", "STREET"], t, "herstory · urbanismo feminista",
-                                [HANDLE, WEBSITE])
-        if not avatar.exists():
-            cx, cy = W // 2, (box[1] + box[3]) // 2
-            self.paste_glasses(img, cx, cy - 70, 760, t - 0.1, color=INK)
-            d = ImageDraw.Draw(img)
-            p = ease_out((t - 0.5) / 0.35)
-            if p > 0:
-                f = display_font(64)
-                d.text((cx, cy + 150 + (1 - p) * 20), "SÍGUENOS PARA", font=f, fill=CREAM, anchor="mm")
-                d.text((cx, cy + 230 + (1 - p) * 20), "MÁS HERSTORY", font=f, fill=INK, anchor="mm")
+        """Closing card: the ink-illustration avatar on its own violet, PURPLE STREET band, handle and site."""
+        img = self.poster_bg(VIOLET)
+        d = ImageDraw.Draw(img)
+        p = ease_out(t / 0.6)
+        z = 0.94 + 0.06 * p + 0.03 * ease_in_out(t / dur)
+        a, mask = self.avatar(W)
+        size = round(W * z)
+        a, mask = a.resize((size, size), Image.BICUBIC), mask.resize((size, size), Image.BICUBIC)
+        if p < 1:
+            mask = mask.point(lambda v: int(v * p))
+        band_top = 1170
+        img.paste(a, ((W - size) // 2, band_top + 60 - size), mask)
+
+        q = ease_out(t / 0.35)
+        band_h = 360
+        y0 = band_top + round((1 - q) * (H - band_top))
+        d.rectangle([0, y0, W, y0 + band_h], fill=INK)
+        for k, word in enumerate(("PURPLE", "STREET")):
+            r = ease_out((t - 0.3 - 0.1 * k) / 0.35)
+            if r <= 0:
+                continue
+            f = display_font(150)
+            d.text((W / 2, y0 + 105 + k * 160 + round((1 - r) * 30)), word, font=f, fill=CREAM, anchor="mm")
+
+        r = ease_out((t - 0.6) / 0.35)
+        if r > 0:
+            dy = round((1 - r) * 24)
+            d.text((W / 2, band_top + band_h + 80 + dy), HANDLE, font=display_font(76), fill=INK, anchor="mm")
+            d.text((W / 2, band_top + band_h + 160 + dy), WEBSITE, font=text_font(44, "SemiBold"), fill=INK,
+                   anchor="mm")
+        r = ease_out((t - 0.9) / 0.35)
+        if r > 0:
+            kf = text_font(38, "ExtraBold")
+            tracked(d, (W / 2, 120 - round((1 - r) * 20)), "SÍGUENOS PARA MÁS HERSTORY", kf, INK, tracking=6,
+                    anchor_center=True)
         return img
 
     # -- overlays

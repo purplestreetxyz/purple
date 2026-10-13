@@ -56,7 +56,8 @@ Everything about a video lives in its JSON config:
 - `music`: `style` (`jazz`, `minimal`, `epic`), `bpm`, `key` (MIDI note), `seed`; `music_volume`.
 - `scenes`: the visual timeline. Each scene starts when the phrase in `at` is spoken, so scenes stay
   in sync if the voice is re-generated. Types:
-  - `intro`: poster card (title block, kicker, duotone image panel). Captions move to `caption_y`.
+  - The first scene has no `at` and starts at 0 s; each video opens straight on a full-bleed photo
+    with the voice and captions.
   - `image`: a Commons `file` with `layout` `full` (full-bleed Ken Burns), `poster` (framed print on
     violet) or `pair` (two portraits, `file2`, `names`). Motion: `zoom` `[start, end]`, `focus`
     / `focus_end` (0–1 image coordinates), optional `crop` `[x0, y0, x1, y1]`, `grade`
@@ -64,7 +65,8 @@ Everything about a video lives in its JSON config:
   - `card`: typographic card (`style` `violet`, `black`, `cream`) with `kicker`, `lines` (strings or
     `{text, style: "accent", size, at}`; `at` reveals the line on a spoken phrase), `sub`, and
     `hide_captions` when the card already shows the spoken words.
-  - The branded closing card (`@purplestreetorg`, purplestreet.org) is appended automatically.
+  - The branded closing card (ink-illustration avatar, PURPLE STREET, `@purplestreetorg`,
+    purplestreet.org) is appended automatically.
 
 After adding a new Commons file, run `python -m pipeline.commons <id>` and then `python -m pipeline.credits`.
 
@@ -83,7 +85,7 @@ the sentence start/end times, then run `python -m pipeline.align <id>` and rende
 ## Brand
 
 Colors, type and layouts follow the Purple Street Instagram branding (ink illustration on violet,
-and the poster with heavy cream "PURPLE STREET" type on black): violet `#9B6BE8`, purple `#5E2A84`,
-cream `#F7EFDF`, ink black; Archivo Black for display type and captions, Inter for small text; and the
-cat-eye glasses mark from purplestreet.org. To use the Instagram ink illustration on the closing card,
-save it as `assets/brand/avatar.png` and re-render.
+and the poster with heavy cream "PURPLE STREET" type on black): violet `#A974F0` (sampled from the
+avatar), purple `#5E2A84`, cream `#F7EFDF`, ink black; Archivo Black for display type and captions,
+Inter for small text. The closing card's logo is the ink-illustration avatar in
+`assets/brand/avatar.jpg`; replace that file to change it.
