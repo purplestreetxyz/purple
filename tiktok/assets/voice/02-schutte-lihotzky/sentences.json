@@ -1,0 +1,78 @@
+{
+  "provider": "gtts",
+  "options": {},
+  "tempo": 1.12,
+  "duration": 58.578,
+  "sentences": [
+    {
+      "index": 0,
+      "text": "Imagina que tu cocina la diseñó una mujer que después se enfrentó a los nazis.",
+      "spoken": "Imagina que tu cocina la diseñó una mujer que después se enfrentó a los nazis.",
+      "start": 0.35,
+      "end": 5.105
+    },
+    {
+      "index": 1,
+      "text": "Se llamaba Margarete Schütte-Lihotzky y fue la primera arquitecta de Austria.",
+      "spoken": "Se llamaba Margarete Shute-Lijotski y fue la primera arquitecta de Austria.",
+      "start": 5.535,
+      "end": 10.171
+    },
+    {
+      "index": 2,
+      "text": "En 1926, en Frankfurt, diseñó la famosa cocina de Frankfurt: un espacio pequeño y funcional, pensado para que las mujeres trabajadoras perdieran menos horas en las tareas de casa.",
+      "spoken": "En 1926, en Frankfurt, diseñó la famosa cocina de Frankfurt: un espacio pequeño y funcional, pensado para que las mujeres trabajadoras perdieran menos horas en las tareas de casa.",
+      "start": 10.451,
+      "end": 24.769
+    },
+    {
+      "index": 3,
+      "text": "Fue el origen de la cocina moderna que hoy tenemos casi todas.",
+      "spoken": "Fue el origen de la cocina moderna que hoy tenemos casi todas.",
+      "start": 25.049,
+      "end": 28.88
+    },
+    {
+      "index": 4,
+      "text": "Pero Margarete no solo pensaba en armarios y encimeras.",
+      "spoken": "Pero Margarete no solo pensaba en armarios y encimeras.",
+      "start": 29.26,
+      "end": 32.818
+    },
+    {
+      "index": 5,
+      "text": "Durante el nazismo se unió a la resistencia, la detuvieron y pasó años en prisión.",
+      "spoken": "Durante el nazismo se unió a la resistencia, la detuvieron y pasó años en prisión.",
+      "start": 33.098,
+      "end": 38.66
+    },
+    {
+      "index": 6,
+      "text": "Sobrevivió y siguió diseñando escuelas y guarderías, convencida de que la arquitectura podía hacernos la vida más justa.",
+      "spoken": "Sobrevivió y siguió diseñando escuelas y guarderías, convencida de que la arquitectura podía hacernos la vida más justa.",
+      "start": 38.94,
+      "end": 46.779
+    },
+    {
+      "index": 7,
+      "text": "Vivió hasta los 102 años.",
+      "spoken": "Vivió hasta los 102 años.",
+      "start": 47.059,
+      "end": 49.198
+    },
+    {
+      "index": 8,
+      "text": "Así que la próxima vez que cocines, piensa en ella.",
+      "spoken": "Así que la próxima vez que cocines, piensa en ella.",
+      "start": 49.628,
+      "end": 52.89
+    },
+    {
+      "index": 9,
+      "text": "Y pregúntate: ¿quién diseña los espacios donde vivimos, y para quién?",
+      "spoken": "Y pregúntate: ¿quién diseña los espacios donde vivimos, y para quién?",
+      "start": 53.27,
+      "end": 58.298
+    }
+  ]
+}
