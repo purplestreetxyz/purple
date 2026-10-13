@@ -6,9 +6,9 @@ Wikimedia Commons, a synthesized Spain-Spanish voiceover, word-synced captions a
 
 | Video | Duration | Config | Output (1080×1920) | Web version (720×1280) |
 |---|---|---|---|---|
-| Las Sinsombrero | 65.7 s | `videos/01-sinsombrero.json` | `output/01-sinsombrero.mp4` (28 MB) | `output/web/01-sinsombrero-720p.mp4` (9 MB) |
-| Margarete Schütte-Lihotzky | 62.7 s | `videos/02-schutte-lihotzky.json` | `output/02-schutte-lihotzky.mp4` (22 MB) | `output/web/02-schutte-lihotzky-720p.mp4` (7 MB) |
-| Clara Campoamor | 69.2 s | `videos/03-clara-campoamor.json` | `output/03-clara-campoamor.mp4` (20 MB) | `output/web/03-clara-campoamor-720p.mp4` (6 MB) |
+| Las Sinsombrero | 65.7 s | `videos/01-sinsombrero.json` | `output/01-sinsombrero.mp4` (30 MB) | `output/web/01-sinsombrero-720p.mp4` (10 MB) |
+| Margarete Schütte-Lihotzky | 62.7 s | `videos/02-schutte-lihotzky.json` | `output/02-schutte-lihotzky.mp4` (24 MB) | `output/web/02-schutte-lihotzky-720p.mp4` (7 MB) |
+| Clara Campoamor | 69.2 s | `videos/03-clara-campoamor.json` | `output/03-clara-campoamor.mp4` (22 MB) | `output/web/03-clara-campoamor-720p.mp4` (7 MB) |
 
 Image, voice and music sources with licenses: [`CREDITS.md`](CREDITS.md).
 
