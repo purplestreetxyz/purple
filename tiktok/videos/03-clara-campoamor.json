@@ -9,7 +9,7 @@
     "say": {}
   },
   "music": {"style": "epic", "bpm": 76, "key": 60, "seed": 31},
-  "music_volume": 0.24,
+  "music_volume": 0.3,
   "scenes": [
     {"type": "intro", "title": ["CLARA", "CAMPOAMOR"], "kicker": "Herstory · Madrid, 1931", "bottom": ["PURPLE STREET"],
      "file": "Columnas y fachada del Congreso de los Diputados de España.JPG", "focus": [0.5, 0.5], "caption_y": 700},
