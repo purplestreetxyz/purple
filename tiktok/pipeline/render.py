@@ -290,6 +290,9 @@ class Renderer:
             img = self.outro(sc, t, dur)
         else:
             raise ValueError(kind)
+        if sc.get("lines") and kind == "image":
+            # Hook type sits on the photo. "instant" is fully on at frame 0.
+            self.paint_type(img, sc, t + (1.4 if sc.get("instant") else 0.0))
         if sc.get("label") and kind == "image":
             self.draw_label(img, sc["label"], t)
         if kind == "image":
@@ -385,13 +388,21 @@ class Renderer:
         style = sc.get("style", "violet")
         bg = {"violet": VIOLET, "purple": PURPLE, "black": INK, "cream": CREAM}[style]
         img = self.poster_bg(bg)
+        if sc.get("instant"):
+            t = max(t, 1.4)
+        self.paint_type(img, sc, t)
+        return img
+
+    def paint_type(self, img, sc, t):
+        """Display type shared by cards and photo hooks. Accent blocks use violet #A974F0."""
+        style = sc.get("style", "violet")
         d = ImageDraw.Draw(img)
         lines = [ln if isinstance(ln, dict) else {"text": ln} for ln in sc["lines"]]
         base = sc.get("size", 150)
-        # measure
+        max_w = sc.get("max_w", 880)
         rows = []
         for ln in lines:
-            f = fit_font(ln["text"], 880, ln.get("size", base))
+            f = fit_font(ln["text"], max_w, ln.get("size", base))
             l, tp, r, b = f.getbbox(ln["text"])
             rows.append((ln, f, l, tp, r - l, b - tp))
         kicker = sc.get("kicker")
@@ -400,7 +411,7 @@ class Renderer:
         y = sc.get("center_y", 820) - total_h // 2
         if kicker:
             p = ease_out(t / 0.3)
-            kc = CREAM if style in ("black", "purple", "violet") else INK
+            kc = CREAM if style in ("black", "purple", "violet", "photo") else INK
             if p > 0:
                 tracked(d, (W / 2, y + (1 - p) * 20), kicker.upper(), kf, kc, tracking=6, anchor_center=True)
             y += 90
@@ -410,7 +421,10 @@ class Renderer:
             bh = th + 44
             if p > 0:
                 accent = ln.get("style") == "accent"
-                if style in ("black",):
+                if style == "photo":
+                    # Ink blocks plus a violet accent block, so the hook reads on a photograph.
+                    block, color = (VIOLET if accent else INK), (INK if accent else CREAM)
+                elif style in ("black",):
                     block, color = (VIOLET if accent else None), (CREAM if not accent else INK)
                 elif style == "cream":
                     block, color = (VIOLET if accent else INK), (INK if accent else CREAM)
@@ -434,7 +448,7 @@ class Renderer:
             p = ease_out((t - sc.get("sub_delay", 0.5)) / 0.3)
             if p > 0:
                 sf = text_font(44, "SemiBold")
-                sc_col = CREAM if style in ("black", "purple", "violet") else INK
+                sc_col = CREAM if style in ("black", "purple", "violet", "photo") else INK
                 for line in sc["sub"] if isinstance(sc["sub"], list) else [sc["sub"]]:
                     d.text((W / 2, y + 30 + (1 - p) * 20), line, font=sf, fill=sc_col, anchor="ma")
                     y += 62

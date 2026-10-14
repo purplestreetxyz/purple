@@ -6,8 +6,8 @@ Wikimedia Commons, a synthesized Spain-Spanish voiceover, word-synced captions a
 
 | Video | Duration | Config | Output (1080×1920) | Web version (720×1280) |
 |---|---|---|---|---|
-| Las Sinsombrero | ~49 s | `videos/01-sinsombrero.json` | `output/01-sinsombrero.mp4` | `output/web/01-sinsombrero-720p.mp4` |
-| Margarete Schütte-Lihotzky | ~48 s | `videos/02-schutte-lihotzky.json` | `output/02-schutte-lihotzky.mp4` | `output/web/02-schutte-lihotzky-720p.mp4` |
+| Las Sinsombrero | 43 s | `videos/01-sinsombrero.json` | `output/01-sinsombrero.mp4` | `output/web/01-sinsombrero-720p.mp4` |
+| Margarete Schütte-Lihotzky | 43 s | `videos/02-schutte-lihotzky.json` | `output/02-schutte-lihotzky.mp4` | `output/web/02-schutte-lihotzky-720p.mp4` |
 | Clara Campoamor | ~55 s | `videos/03-clara-campoamor.json` | `output/03-clara-campoamor.mp4` | `output/web/03-clara-campoamor-720p.mp4` |
 
 Image, voice and music sources with licenses: [`CREDITS.md`](CREDITS.md).
@@ -60,17 +60,21 @@ Everything about a video lives in its JSON config:
 - `music`: `style` (`jazz`, `minimal`, `epic`), `bpm`, `key` (MIDI note), `seed`; `music_volume`.
 - `scenes`: the visual timeline. Each scene starts when the phrase in `at` is spoken, so scenes stay
   in sync if the voice is re-generated. Types:
-  - The first scene has no `at` and starts at 0 s; each video opens straight on a full-bleed photo
-    with the voice and captions.
+  - The first scene has no `at` and starts at 0 s. It can be a full-bleed photo or a typographic
+    hook. `instant: true` draws the type fully on frame 0. An image scene may also carry `lines`
+    (same type as a card; `style: "photo"` puts ink blocks and a violet `#A974F0` accent on the
+    picture).
   - `image`: a Commons `file` with `layout` `full` (full-bleed Ken Burns), `poster` (framed print on
     violet) or `pair` (two portraits, `file2`, `names`). Motion: `zoom` `[start, end]`, `focus`
     / `focus_end` (0–1 image coordinates), optional `crop` `[x0, y0, x1, y1]`, `grade`
     (`auto`, `mono`, `duo`, `color`), and a `label` name tag `{name, info}`.
   - `card`: typographic card (`style` `violet`, `black`, `cream`) with `kicker`, `lines` (strings or
     `{text, style: "accent", size, at}`; `at` reveals the line on a spoken phrase), `sub`, and
-    `hide_captions` when the card already shows the spoken words.
+    `hide_captions` when the card already shows the spoken words. On a black card the accent block
+    is violet `#A974F0`; on a violet card the accent block is cream.
   - The branded closing card (ink-illustration avatar, PURPLE STREET, `@purplestreetorg`,
     purplestreet.org) is appended automatically.
+- `captions/<id>.txt`: the TikTok post caption. The hook videos open that caption on the question.
 
 After adding a new Commons file, run `python -m pipeline.commons <id>` and then `python -m pipeline.credits`.
 
