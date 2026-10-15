@@ -6,77 +6,77 @@
     "model_id": "eleven_multilingual_v2"
   },
   "tempo": 1.0,
-  "duration": 48.208,
+  "duration": 39.356,
   "sentences": [
     {
       "index": 0,
-      "text": "Imagina que tu cocina la diseñó una mujer que después se enfrentó a los nazis.",
-      "spoken": "Imagina que tu cocina la diseñó una mujer que después se enfrentó a los nazis.",
-      "start": 0.35,
-      "end": 4.63
+      "text": "La Gestapo pidió la pena de muerte para la mujer que diseñó tu cocina.",
+      "spoken": "La Gestapo pidió la pena de muerte para la mujer que diseñó tu cocina.",
+      "start": 0.0,
+      "end": 3.4
     },
     {
       "index": 1,
       "text": "Se llamaba Margarete Schütte-Lihotzky y fue la primera arquitecta de Austria.",
       "spoken": "Se llamaba Margarete Shute-Lijotski y fue la primera arquitecta de Austria.",
-      "start": 4.71,
-      "end": 8.63
+      "start": 3.71,
+      "end": 7.74
     },
     {
       "index": 2,
-      "text": "En 1926, en Frankfurt, diseñó la famosa cocina de Frankfurt: un espacio pequeño y funcional, pensado para que las mujeres trabajadoras perdieran menos horas en las tareas de casa.",
-      "spoken": "En 1926, en Frankfurt, diseñó la famosa cocina de Frankfurt: un espacio pequeño y funcional, pensado para que las mujeres trabajadoras perdieran menos horas en las tareas de casa.",
-      "start": 9.95,
-      "end": 20.23
+      "text": "En 1926, en Frankfurt, creó una cocina pequeña y funcional para que las mujeres trabajadoras perdieran menos horas en casa.",
+      "spoken": "En 1926, en Frankfurt, creó una cocina pequeña y funcional para que las mujeres trabajadoras perdieran menos horas en casa.",
+      "start": 8.23,
+      "end": 15.24
     },
     {
       "index": 3,
-      "text": "Fue el origen de la cocina moderna que hoy tenemos casi todas.",
-      "spoken": "Fue el origen de la cocina moderna que hoy tenemos casi todas.",
-      "start": 20.85,
-      "end": 24.09
+      "text": "Es el origen de la cocina que hoy tenemos casi todas.",
+      "spoken": "Es el origen de la cocina que hoy tenemos casi todas.",
+      "start": 15.51,
+      "end": 17.9
     },
     {
       "index": 4,
-      "text": "Pero Margarete no solo pensaba en armarios y encimeras.",
-      "spoken": "Pero Margarete no solo pensaba en armarios y encimeras.",
-      "start": 24.81,
-      "end": 27.85
+      "text": "Pero en 1941, por unirse a la resistencia antinazi, la detuvieron en Viena.",
+      "spoken": "Pero en 1941, por unirse a la resistencia antinazi, la detuvieron en Viena.",
+      "start": 18.23,
+      "end": 23.98
     },
     {
       "index": 5,
-      "text": "Durante el nazismo se unió a la resistencia, la detuvieron y pasó años en prisión.",
-      "spoken": "Durante el nazismo se unió a la resistencia, la detuvieron y pasó años en prisión.",
-      "start": 28.35,
-      "end": 32.35
+      "text": "Se libró de la ejecución, pero pasó cuatro años en prisión.",
+      "spoken": "Se libró de la ejecución, pero pasó cuatro años en prisión.",
+      "start": 23.91,
+      "end": 26.68
     },
     {
       "index": 6,
-      "text": "Sobrevivió y siguió diseñando escuelas y guarderías, convencida de que la arquitectura podía hacernos la vida más justa.",
-      "spoken": "Sobrevivió y siguió diseñando escuelas y guarderías, convencida de que la arquitectura podía hacernos la vida más justa.",
-      "start": 33.03,
-      "end": 38.59
+      "text": "Al salir, siguió diseñando guarderías y escuelas para hacernos la vida más justa.",
+      "spoken": "Al salir, siguió diseñando guarderías y escuelas para hacernos la vida más justa.",
+      "start": 26.55,
+      "end": 31.32
     },
     {
       "index": 7,
       "text": "Vivió hasta los 102 años.",
       "spoken": "Vivió hasta los 102 años.",
-      "start": 39.15,
-      "end": 40.69
+      "start": 31.49,
+      "end": 33.06
     },
     {
       "index": 8,
-      "text": "Así que la próxima vez que cocines, piensa en ella.",
-      "spoken": "Así que la próxima vez que cocines, piensa en ella.",
-      "start": 41.17,
-      "end": 43.39
+      "text": "Y ahora dime: ¿tu cocina está pensada para ti o para que trabajes más?",
+      "spoken": "Y ahora dime: ¿tu cocina está pensada para ti o para que trabajes más?",
+      "start": 33.47,
+      "end": 37.5
     },
     {
       "index": 9,
-      "text": "Y pregúntate: ¿quién diseña los espacios donde vivimos, y para quién?",
-      "spoken": "Y pregúntate: ¿quién diseña los espacios donde vivimos, y para quién?",
-      "start": 43.81,
-      "end": 47.33
+      "text": "Te leo en comentarios.",
+      "spoken": "Te leo en comentarios.",
+      "start": 37.95,
+      "end": 38.84
     }
   ]
 }
