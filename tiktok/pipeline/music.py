@@ -190,7 +190,7 @@ def build_music(video_id: str, duration: float | None = None) -> None:
     mcfg = cfg.get("music", {})
     if duration is None:
         words = json.loads((VOICE / cfg["id"] / "words.json").read_text())
-        duration = words[-1]["e"] + cfg.get("outro_gap", 0.5) + 4.2 + 0.5
+        duration = words[-1]["e"] + cfg.get("outro_gap", 0.5) + float(cfg.get("outro_dur", 4.2)) + 0.5
     mix = compose(mcfg.get("style", "minimal"), mcfg.get("bpm", 92), mcfg.get("key", 57), duration, mcfg.get("seed", 1))
     stereo = np.stack([mix, np.roll(mix, int(0.012 * SR))], axis=1)
     MUSIC.mkdir(parents=True, exist_ok=True)

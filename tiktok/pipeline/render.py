@@ -167,8 +167,9 @@ def build_timeline(cfg: dict, words: list[dict]) -> dict:
                 ln["delay"] = words[hit]["s"] - sc["start"]
         scenes.append(sc)
     voice_end = words[-1]["e"]
+    outro_dur = float(cfg.get("outro_dur", OUTRO_DUR))
     outro_start = voice_end + cfg.get("outro_gap", 0.5)
-    total = outro_start + OUTRO_DUR
+    total = outro_start + outro_dur
     scenes.append({"type": "outro", "start": outro_start})
     for a, b in zip(scenes, scenes[1:]):
         a["end"] = b["start"]
@@ -176,8 +177,20 @@ def build_timeline(cfg: dict, words: list[dict]) -> dict:
     return {"scenes": scenes, "total": total, "voice_end": voice_end}
 
 
-def caption_pages(words: list[dict], hidden: list[tuple[float, float]]) -> list[dict]:
-    """Group words into short caption pages (max 2 lines, <= ~4-5 words)."""
+def caption_pages(words: list[dict], hidden: list[tuple[float, float]], mode: str = "page") -> list[dict]:
+    """Group words into caption pages. mode "word" is one kinetic word at a time."""
+    if mode == "word":
+        out = []
+        for w in words:
+            s = w["s"]
+            if any(a - 0.05 <= s < b for a, b in hidden):
+                continue
+            out.append({"words": [w], "lines": [[w]], "start": s, "end": w["e"]})
+        for a, b in zip(out, out[1:]):
+            a["end"] = b["start"]
+        if out:
+            out[-1]["end"] += 0.25
+        return out
     pages, cur = [], []
     font = display_font(CAPTION_SIZE)
 
@@ -258,8 +271,15 @@ class Renderer:
         z0, z1 = sc.get("zoom", [1.0, 1.12])
         zmax = max(z0, z1)
         im, base = self.fitted(sc, box_w, box_h, zmax)
-        p = ease_in_out(t / max(dur, 0.01)) if sc.get("ease", True) else t / max(dur, 0.01)
-        p = 0.15 + 0.85 * p  # never fully static at the cut
+        ease = sc.get("ease", True)
+        u = min(1.0, t / max(dur, 0.01))
+        if ease == "punch":
+            # Ease-out: the zoom is fastest on the first frames, so frame 0 is already moving.
+            p = ease_out(u)
+        elif ease:
+            p = 0.15 + 0.85 * ease_in_out(u)
+        else:
+            p = 0.15 + 0.85 * u  # never fully static at the cut
         z = z0 + (z1 - z0) * p
         fx0, fy0 = sc.get("focus", [0.5, 0.5])
         fx1, fy1 = sc.get("focus_end", [fx0, fy0])
@@ -468,7 +488,9 @@ class Renderer:
         """Closing card: the ink-illustration avatar on its own violet, PURPLE STREET band, handle and site."""
         img = self.poster_bg(VIOLET)
         d = ImageDraw.Draw(img)
-        p = ease_out(t / 0.6)
+        # A 2s card still has to land the handle. Compress the entrance; the 4.2s card is unchanged.
+        pace = 0.45 if dur <= 2.5 else 1.0
+        p = ease_out(t / (0.6 * pace))
         z = 0.94 + 0.06 * p + 0.03 * ease_in_out(t / dur)
         a, mask = self.avatar(W)
         size = round(W * z)
@@ -478,24 +500,24 @@ class Renderer:
         band_top = 1170
         img.paste(a, ((W - size) // 2, band_top + 60 - size), mask)
 
-        q = ease_out(t / 0.35)
+        q = ease_out(t / (0.35 * pace))
         band_h = 360
         y0 = band_top + round((1 - q) * (H - band_top))
         d.rectangle([0, y0, W, y0 + band_h], fill=INK)
-        for k, word in enumerate(("PURPLE", "STREET")):
-            r = ease_out((t - 0.3 - 0.1 * k) / 0.35)
+        for i, word in enumerate(("PURPLE", "STREET")):
+            r = ease_out((t - (0.3 + 0.1 * i) * pace) / (0.35 * pace))
             if r <= 0:
                 continue
             f = display_font(150)
-            d.text((W / 2, y0 + 105 + k * 160 + round((1 - r) * 30)), word, font=f, fill=CREAM, anchor="mm")
+            d.text((W / 2, y0 + 105 + i * 160 + round((1 - r) * 30)), word, font=f, fill=CREAM, anchor="mm")
 
-        r = ease_out((t - 0.6) / 0.35)
+        r = ease_out((t - 0.6 * pace) / (0.35 * pace))
         if r > 0:
             dy = round((1 - r) * 24)
             d.text((W / 2, band_top + band_h + 80 + dy), HANDLE, font=display_font(76), fill=INK, anchor="mm")
             d.text((W / 2, band_top + band_h + 160 + dy), WEBSITE, font=text_font(44, "SemiBold"), fill=INK,
                    anchor="mm")
-        r = ease_out((t - 0.9) / 0.35)
+        r = ease_out((t - 0.9 * pace) / (0.35 * pace))
         if r > 0:
             kf = text_font(38, "ExtraBold")
             tracked(d, (W / 2, 120 - round((1 - r) * 20)), "SÍGUENOS PARA MÁS HERSTORY", kf, INK, tracking=6,
@@ -546,11 +568,12 @@ class Renderer:
         page = next((p for p in self.pages if p["start"] - 0.02 <= t < p["end"]), None)
         if not page:
             return
-        widest = max(display_font(CAPTION_SIZE).getlength(" ".join(w["w"].upper() for w in ln)) for ln in page["lines"])
-        size = CAPTION_SIZE if widest <= W - 110 else int(CAPTION_SIZE * (W - 110) / widest)
+        base = 132 if self.cfg.get("captions") == "word" else CAPTION_SIZE
+        widest = max(display_font(base).getlength(" ".join(w["w"].upper() for w in ln)) for ln in page["lines"])
+        size = base if widest <= W - 110 else int(base * (W - 110) / widest)
         f = display_font(size)
         d = ImageDraw.Draw(img)
-        lh = round(112 * size / CAPTION_SIZE)
+        lh = round(112 * size / CAPTION_SIZE) if self.cfg.get("captions") != "word" else round(size * 1.15)
         n = len(page["lines"])
         y0 = center_y - (n * lh) // 2
         appear = back_out((t - page["start"] + 0.02) / 0.16, 1.2)
@@ -592,7 +615,8 @@ class Renderer:
         img = add_grain(img, n, 0.2)
         if not cur.get("hide_captions") and cur["type"] != "outro":
             light = cur["type"] == "card" and cur.get("style") == "cream"
-            self.draw_captions(img, t, cur.get("caption_y", CAPTION_Y), light)
+            default_y = 1520 if self.cfg.get("captions") == "word" else CAPTION_Y
+            self.draw_captions(img, t, cur.get("caption_y", default_y), light)
         return img.tobytes()
 
 
@@ -618,11 +642,15 @@ def mix_audio(cfg: dict, timeline: dict, out: Path) -> None:
     music = MUSIC / f"{cfg['id']}.flac"
     bed = cfg.get("music_volume", 0.24)
     swell = cfg.get("outro_music_volume", 0.9)
-    vol = f"if(lt(t,{outro - 0.3:.3f}),{bed},{bed}+({swell}-{bed})*min(1,(t-{outro - 0.3:.3f})/0.8))"
+    outro_dur = float(cfg.get("outro_dur", OUTRO_DUR))
+    fade_d = 0.55 if outro_dur <= 2.5 else 1.4
+    fade_in = 0.35 if outro_dur <= 2.5 else 1.2
+    ramp = 0.45 if outro_dur <= 2.5 else 0.8
+    vol = f"if(lt(t,{outro - 0.15:.3f}),{bed},{bed}+({swell}-{bed})*min(1,(t-{outro - 0.15:.3f})/{ramp}))"
     graph = (
         f"[0:a]aresample=44100,apad,atrim=0:{total:.3f},asplit=2[v][sc];"
-        f"[1:a]aresample=44100,apad,atrim=0:{total:.3f},volume='{vol}':eval=frame,afade=t=in:d=1.2,"
-        f"afade=t=out:st={total - 1.4:.3f}:d=1.4[m];"
+        f"[1:a]aresample=44100,apad,atrim=0:{total:.3f},volume='{vol}':eval=frame,afade=t=in:d={fade_in},"
+        f"afade=t=out:st={total - fade_d:.3f}:d={fade_d}[m];"
         f"[m][sc]sidechaincompress=threshold=0.025:ratio=5:attack=15:release=400:makeup=1[md];"
         f"[v][md]amix=inputs=2:duration=first:normalize=0,"
         f"loudnorm=I=-14:TP=-1.2:LRA=11,aresample=44100[a]"
@@ -636,7 +664,7 @@ def render(video_id: str, workers: int = 3, preview: str | None = None, web: boo
     words = json.loads((VOICE / cfg["id"] / "words.json").read_text())
     tl = build_timeline(cfg, words)
     hidden = [(s["start"], s["end"]) for s in tl["scenes"] if s.get("hide_captions")]
-    pages = caption_pages(words, hidden)
+    pages = caption_pages(words, hidden, cfg.get("captions", "page"))
     n_frames = math.ceil(tl["total"] * FPS)
 
     if preview:  # --preview "3.2,10,25.5" -> PNG frames for inspection

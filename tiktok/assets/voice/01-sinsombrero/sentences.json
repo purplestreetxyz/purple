@@ -6,84 +6,14 @@
     "model_id": "eleven_multilingual_v2"
   },
   "tempo": 1.0,
-  "duration": 38.566,
+  "duration": 24.832,
   "sentences": [
     {
       "index": 0,
-      "text": "Les tiraron piedras por quitarse el sombrero.",
-      "spoken": "Les tiraron piedras por quitarse el sombrero.",
+      "text": "Les tiraron piedras por quitarse el sombrero. Madrid, años 20: Maruja Mallo y Margarita Manso se lo quitaron en plena Puerta del Sol. Las insultaron y las apedrearon. Pero no pararon. Concha Méndez, María Zambrano, Rosa Chacel… también fueron la Generación del 27, aunque en clase solo nos hablaron de ellos. Hoy las llamamos con el mote que usaron para burlarse: las Sinsombrero. ¿A cuántas estudiaste tú en el instituto?",
+      "spoken": "Les tiraron piedras por quitarse el sombrero. Madrid, años 20: Maruja Mallo y Margarita Manso se lo quitaron en plena Puerta del Sol. Las insultaron y las apedrearon. Pero no pararon. Concha Méndez, María Zambrano, Rosa Chacel… también fueron la Generación del 27, aunque en clase solo nos hablaron de ellos. Hoy las llamamos con el mote que usaron para burlarse: las Sinsombrero. ¿A cuántas estudiaste tú en el instituto?",
       "start": 0.0,
-      "end": 2.18
-    },
-    {
-      "index": 1,
-      "text": "Madrid, años 20, Puerta del Sol.",
-      "spoken": "Madrid, años 20, Puerta del Sol.",
-      "start": 2.47,
-      "end": 4.7
-    },
-    {
-      "index": 2,
-      "text": "Maruja Mallo y Margarita Manso paseaban con Lorca y Dalí y decidieron quitárselo.",
-      "spoken": "Maruja Mallo y Margarita Manso paseaban con Lorca y Dalí y decidieron quitárselo.",
-      "start": 5.15,
-      "end": 9.52
-    },
-    {
-      "index": 3,
-      "text": "Para ellas, el sombrero era el símbolo de todo lo que las encorsetaba.",
-      "spoken": "Para ellas, el sombrero era el símbolo de todo lo que las encorsetaba.",
-      "start": 9.93,
-      "end": 13.28
-    },
-    {
-      "index": 4,
-      "text": "La gente las insultó y las apedreó, porque una mujer con la cabeza descubierta era un escándalo.",
-      "spoken": "La gente las insultó y las apedreó, porque una mujer con la cabeza descubierta era un escándalo.",
-      "start": 13.73,
-      "end": 18.52
-    },
-    {
-      "index": 5,
-      "text": "Pero no pararon.",
-      "spoken": "Pero no pararon.",
-      "start": 18.63,
-      "end": 19.26
-    },
-    {
-      "index": 6,
-      "text": "Maruja Mallo, Concha Méndez, María Zambrano, Rosa Chacel… también fueron la Generación del 27, aunque en clase solo nos hablaron de ellos.",
-      "spoken": "Maruja Mallo, Concha Méndez, María Zambrano, Rosa Chacel… también fueron la Generación del 27, aunque en clase solo nos hablaron de ellos.",
-      "start": 19.71,
-      "end": 28.28
-    },
-    {
-      "index": 7,
-      "text": "¿Lo mejor?",
-      "spoken": "¿Lo mejor?",
-      "start": 28.49,
-      "end": 28.96
-    },
-    {
-      "index": 8,
-      "text": "Hoy las llamamos con el mote que usaron para burlarse: las Sinsombrero.",
-      "spoken": "Hoy las llamamos con el mote que usaron para burlarse: las Sinsombrero.",
-      "start": 29.57,
-      "end": 33.78
-    },
-    {
-      "index": 9,
-      "text": "¿A cuántas de ellas estudiaste tú en el instituto?",
-      "spoken": "¿A cuántas de ellas estudiaste tú en el instituto?",
-      "start": 34.51,
-      "end": 36.82
-    },
-    {
-      "index": 10,
-      "text": "Cuéntamelo en comentarios.",
-      "spoken": "Cuéntamelo en comentarios.",
-      "start": 36.99,
-      "end": 38.02
+      "end": 24.832
     }
   ]
 }
