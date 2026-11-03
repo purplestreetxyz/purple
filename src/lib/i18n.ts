@@ -78,6 +78,7 @@ const es = {
           link: 'Ver programa oficial',
           paragraphs: [
             'En el marco del festival «Capital Mundial de l’Arquitectura» en Barcelona, se han planteado talleres participativos dirigidos a la infancia. La actividad se centra en el mapeo colaborativo: a partir de un gran plano, se describen los itinerarios cotidianos y se registran los puntos fuertes y débiles del entorno según su experiencia. El resultado es un conjunto de propuestas que pone en valor la mirada de la infancia, refuerza su vínculo con el entorno y fomenta una lectura crítica del espacio construido.',
+            'Esta actividad se realiza en colaboración con Estudi Krea.',
           ],
         },
         fanzines: {
@@ -95,6 +96,7 @@ const es = {
           link: 'Ver proyecto Arquiescola',
           paragraphs: [
             'En el marco de Arquiescola, un programa que acerca la arquitectura a escuelas e institutos, esta edición abordó las barreras arquitectónicas. A través de diferentes recorridos por su centro educativo, el alumnado analizó la accesibilidad de los espacios y desarrolló colectivamente propuestas para mejorarlos.',
+            'Esta actividad se realiza en colaboración con Estudi Krea.',
           ],
         },
       },
@@ -107,6 +109,7 @@ const es = {
           paragraphs: [
             'En el marco del festival «Capital Mundial de l’Arquitectura» se han organizado Jane’s Walks en los diez distritos de Barcelona.',
             'Cada itinerario promueve la conversación y la exploración compartida del entorno. La propuesta sitúa en el centro la vida cotidiana —el espacio público, los cuidados, el comercio local y la memoria— y fomenta la pluralidad de miradas para construir un relato colectivo.',
+            'Esta actividad se realiza en colaboración con Estudi Krea.',
           ],
         },
         manresa: {
@@ -115,6 +118,7 @@ const es = {
           mediaLabel: 'Jane’s Walk Manresa',
           paragraphs: [
             'En 2025 celebramos una Jane’s Walk en Manresa. Tuvimos la suerte de caminar junto a quien había ejercido como urbanista municipal de la ciudad durante muchos años y conversar sobre sus transformaciones urbanas, su memoria y los retos que todavía permanecen abiertos.',
+            'Esta actividad se realiza en colaboración con Estudi Krea.',
           ],
         },
         sion: {
@@ -296,6 +300,7 @@ const ca: typeof es = {
           link: 'Veure el programa oficial',
           paragraphs: [
             'En el marc del festival «Capital Mundial de l’Arquitectura» a Barcelona, s’han plantejat tallers participatius adreçats a la infància. L’activitat se centra en el mapatge col·laboratiu: a partir d’un gran plànol, es descriuen els itineraris quotidians i es registren els punts forts i febles de l’entorn segons la seva experiència. El resultat és un conjunt de propostes que posa en valor la mirada de la infància, reforça el seu vincle amb l’entorn i fomenta una lectura crítica de l’espai construït.',
+            'Aquesta activitat es duu a terme en col·laboració amb Estudi Krea.',
           ],
         },
         fanzines: {
@@ -313,6 +318,7 @@ const ca: typeof es = {
           link: 'Veure el projecte Arquiescola',
           paragraphs: [
             'En el marc d’Arquiescola, un programa que acosta l’arquitectura a escoles i instituts, aquesta edició va abordar les barreres arquitectòniques. A través de diferents recorreguts pel seu centre educatiu, l’alumnat va analitzar l’accessibilitat dels espais i va desenvolupar col·lectivament propostes per millorar-los.',
+            'Aquesta activitat es duu a terme en col·laboració amb Estudi Krea.',
           ],
         },
       },
@@ -325,6 +331,7 @@ const ca: typeof es = {
           paragraphs: [
             'En el marc del festival «Capital Mundial de l’Arquitectura» s’han organitzat Jane’s Walks als deu districtes de Barcelona.',
             'Cada itinerari promou la conversa i l’exploració compartida de l’entorn. La proposta situa al centre la vida quotidiana —l’espai públic, les cures, el comerç local i la memòria— i fomenta la pluralitat de mirades per construir un relat col·lectiu.',
+            'Aquesta activitat es duu a terme en col·laboració amb Estudi Krea.',
           ],
         },
         manresa: {
@@ -333,6 +340,7 @@ const ca: typeof es = {
           mediaLabel: 'Jane’s Walk Manresa',
           paragraphs: [
             'L’any 2025 vam celebrar una Jane’s Walk a Manresa. Vam tenir la sort de caminar al costat de qui havia exercit com a urbanista municipal de la ciutat durant molts anys i conversar sobre les seves transformacions urbanes, la seva memòria i els reptes que encara continuen oberts.',
+            'Aquesta activitat es duu a terme en col·laboració amb Estudi Krea.',
           ],
         },
         sion: {
@@ -514,6 +522,7 @@ const en: typeof es = {
           link: 'View official programme',
           paragraphs: [
             'As part of Barcelona’s «World Capital of Architecture» festival, we developed participatory workshops for children. The activity centres on collaborative mapping: using a large-scale map, participants describe their everyday routes and record the strengths and weaknesses of their surroundings based on their own experience. The result is a collection of proposals that values children’s perspectives, strengthens their connection to their surroundings and encourages a critical reading of the built environment.',
+            'This activity is carried out in collaboration with Estudi Krea.',
           ],
         },
         fanzines: {
@@ -531,6 +540,7 @@ const en: typeof es = {
           link: 'View the Arquiescola project',
           paragraphs: [
             'As part of Arquiescola, a programme that brings architecture closer to schools, this edition focused on architectural barriers. Through different routes around their school, students analysed the accessibility of its spaces and collectively developed proposals to improve them.',
+            'This activity is carried out in collaboration with Estudi Krea.',
           ],
         },
       },
@@ -543,6 +553,7 @@ const en: typeof es = {
           paragraphs: [
             'As part of the «World Capital of Architecture» festival, Jane’s Walks have been organised across Barcelona’s ten districts.',
             'Each route encourages conversation and shared exploration of the surroundings. Everyday life —public space, care, local commerce and memory— takes centre stage, while a plurality of perspectives helps build a collective urban narrative.',
+            'This activity is carried out in collaboration with Estudi Krea.',
           ],
         },
         manresa: {
@@ -551,6 +562,7 @@ const en: typeof es = {
           mediaLabel: 'Jane’s Walk Manresa',
           paragraphs: [
             'In 2025 we held a Jane’s Walk in Manresa. We had the opportunity to walk alongside the person who had served as the city’s municipal urban planner for many years and discuss its urban transformations, its memory and the challenges that remain open.',
+            'This activity is carried out in collaboration with Estudi Krea.',
           ],
         },
         sion: {
@@ -732,6 +744,7 @@ const fr: typeof es = {
           link: 'Voir le programme officiel',
           paragraphs: [
             'Dans le cadre du festival «Capitale mondiale de l’architecture» à Barcelone, nous avons conçu des ateliers participatifs destinés aux enfants. L’activité repose sur la cartographie collaborative: à partir d’un grand plan, les participant·es décrivent leurs trajets quotidiens et identifient les points forts et faibles de leur environnement selon leur propre expérience. Le résultat est un ensemble de propositions qui valorise le regard des enfants, renforce leur lien avec leur environnement et encourage une lecture critique de l’espace construit.',
+            'Cette activité est réalisée en collaboration avec Estudi Krea.',
           ],
         },
         fanzines: {
@@ -749,6 +762,7 @@ const fr: typeof es = {
           link: 'Voir le projet Arquiescola',
           paragraphs: [
             'Dans le cadre d’Arquiescola, un programme qui rapproche l’architecture des écoles et des collèges, cette édition a abordé les barrières architecturales. À travers différents parcours dans leur établissement, les élèves ont analysé l’accessibilité des espaces et élaboré collectivement des propositions pour les améliorer.',
+            'Cette activité est réalisée en collaboration avec Estudi Krea.',
           ],
         },
       },
@@ -761,6 +775,7 @@ const fr: typeof es = {
           paragraphs: [
             'Dans le cadre du festival «Capitale mondiale de l’architecture», des Jane’s Walks ont été organisées dans les dix districts de Barcelone.',
             'Chaque itinéraire encourage la conversation et l’exploration partagée de l’environnement. La vie quotidienne —l’espace public, le soin, le commerce local et la mémoire— est placée au centre, tandis que la pluralité des regards contribue à construire un récit collectif.',
+            'Cette activité est réalisée en collaboration avec Estudi Krea.',
           ],
         },
         manresa: {
@@ -769,6 +784,7 @@ const fr: typeof es = {
           mediaLabel: 'Jane’s Walk Manresa',
           paragraphs: [
             'En 2025, nous avons organisé une Jane’s Walk à Manresa. Nous avons eu la chance de marcher avec la personne qui avait été urbaniste municipal de la ville pendant de nombreuses années et d’échanger sur ses transformations urbaines, sa mémoire et les défis qui restent encore ouverts.',
+            'Cette activité est réalisée en collaboration avec Estudi Krea.',
           ],
         },
         sion: {
